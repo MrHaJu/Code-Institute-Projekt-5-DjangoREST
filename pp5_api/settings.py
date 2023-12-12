@@ -60,9 +60,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "127.0.0.1:8000",
-    "recipe-share-pp5-ea6d44d9d1e0.herokuapp.com",
-    "127.0.0.1",
+    os.environ.get('ALLOWED_HOST'),
+   '127.0.0.1:8000', "127.0.0.1",
 ]
 
 
