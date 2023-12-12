@@ -61,7 +61,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     "127.0.0.1:8000",
-    "https://recipe-share-pp5-ea6d44d9d1e0.herokuapp.com/",
+    "https://recipe-share-pp5-ea6d44d9d1e0.herokuapp.com",
     "127.0.0.1",
 ]
 
