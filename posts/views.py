@@ -1,9 +1,10 @@
 from django.db.models import Count
-from rest_framework import generics, permissions, filters
+from rest_framework import generics, permissions, filters, status
 from django_filters.rest_framework import DjangoFilterBackend
 from pp5_api.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
+from rest_framework.response import Response
 
 
 class PostList(generics.ListCreateAPIView):
@@ -51,15 +52,15 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
     
-    def get(self, request, pk):
-        post = self.get_object(pk)
+    def get(self, request, *args, **kwargs):
+        post = self.get_object()
         serializer = PostSerializer(
             post, context={'request': request}
         )
         return Response(serializer.data)
-    
-    def put(self, request, pk):
-        post = self.get_object(pk)
+
+    def put(self, request, *args, **kwargs):
+        post = self.get_object()
         serializer = PostSerializer(
             post, data=request.data, context={'request': request}
         )
@@ -67,10 +68,10 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    def delete(self, request, pk):
-        post = self.get_object(pk)
+
+    def delete(self, request, *args, **kwargs):
+        post = self.get_object()
         post.delete()
         return Response(
             status=status.HTTP_204_NO_CONTENT
-            )
+        )
