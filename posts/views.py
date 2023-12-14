@@ -75,3 +75,29 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         return Response(
             status=status.HTTP_204_NO_CONTENT
         )
+        
+    def perform_create(self, serializer):
+        ingredients_input = self.request.data.get('ingredients', '')
+        # Zerlegen Sie die Zutaten im Eingabefeld in eine Liste
+        ingredients_input = ingredients_input.split(',')
+        # Wenn es bereits vorhandene Inhalte gibt, füge das Neue hinzu
+        if serializer.instance and serializer.instance.ingredients:
+            existing_ingredients = serializer.instance.ingredients.split(',')
+
+        # Erstellen Sie eine neue Liste, die die Zutaten aus dem Eingabefeld und dem Post enthält
+            ingredients = existing_ingredients + ingredients_input
+
+        # Entfernen Sie doppelte Zutaten aus der Liste
+            ingredients = list(set(ingredients))
+        else:
+            ingredients = ingredients_input
+
+
+        # Setzen Sie das 'ingredients' im Serializer auf die kombinierten Werte
+        serializer.validated_data['ingredients'] = ', '.join(ingredients)
+
+        # Führen Sie die Standard-Perform-Create-Methode aus
+        instance = serializer.save(owner=self.request.user)
+
+        # Hinweis: Lassen Sie das 'ingredients' im Serializer unverändert
+        serializer.validated_data['ingredients'] = instance.ingredients

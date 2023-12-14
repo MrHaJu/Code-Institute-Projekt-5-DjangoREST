@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from posts.models import Post
 from likes.models import Like
+from comments.models import Comment
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -11,6 +12,7 @@ class PostSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
+    ingredients = serializers.CharField(source='get_formatted_ingredients', read_only=True)
 
 
     def validate_image(self, value):
@@ -47,7 +49,7 @@ class PostSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'title', 'content', 'image', 'image_filter',
-            'like_id', 'likes_count', 'comments_count',
+            'like_id', 'likes_count', 'comments_count', 'ingredients',
         ]
 
 class PostDetailSerializer(serializers.ModelSerializer):
@@ -58,6 +60,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
+    ingredients = serializers.CharField(allow_blank=True)
 
 
     def validate_image(self, value):
@@ -94,5 +97,9 @@ class PostDetailSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'title', 'content', 'image', 'image_filter',
-            'like_id', 'likes_count', 'comments_count',
+            'like_id', 'likes_count', 'comments_count', 'ingredients',
         ]
+    
+    def validate_ingredients(self, value):
+        # Split the input by spaces and join using commas
+        return ','.join(value.split())

@@ -29,6 +29,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
+    ingredients = models.TextField(blank=True)
     image = models.ImageField(
         upload_to='images/', default='../https://res.cloudinary.com/db6t1xmmn/image/upload/v1702027584/PP5/t6rrcjmjznyvnodygcdn.jpg', blank=True
     )
@@ -36,6 +37,10 @@ class Post(models.Model):
         max_length=32, choices=image_filter_choices, default='normal'
     )
 
+    def get_formatted_ingredients(self):
+        # Implementiere diese Methode, um die Liste der Zutaten im gewünschten Format zurückzugeben
+        # Hier ist ein einfaches Beispiel, das auf einem "ingredients"-Feld basiert
+        return ', '.join(self.ingredients.split(','))
     class Meta:
         ordering = ['-created_at']
 
