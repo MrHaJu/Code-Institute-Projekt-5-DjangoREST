@@ -3,7 +3,7 @@ from rest_framework import generics, permissions, filters, status
 from django_filters.rest_framework import DjangoFilterBackend
 from pp5_api.permissions import IsOwnerOrReadOnly
 from .models import Post
-from .serializers import PostSerializer
+from .serializers import PostSerializer, PostDetailSerializer
 from rest_framework.response import Response
 
 
@@ -45,7 +45,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve a post and edit or delete it if you own it.
     """
-    serializer_class = PostSerializer
+    serializer_class = PostDetailSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
@@ -54,14 +54,14 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     
     def get(self, request, *args, **kwargs):
         post = self.get_object()
-        serializer = PostSerializer(
+        serializer = PostDetailSerializer(
             post, context={'request': request}
         )
         return Response(serializer.data)
 
     def put(self, request, *args, **kwargs):
         post = self.get_object()
-        serializer = PostSerializer(
+        serializer = PostDetailSerializer(
             post, data=request.data, context={'request': request}
         )
         if serializer.is_valid():
