@@ -2,10 +2,11 @@ from django.db.models import Count
 from rest_framework import generics, permissions, filters, status
 from django_filters.rest_framework import DjangoFilterBackend
 from pp5_api.permissions import IsOwnerOrReadOnly
-from .models import Post
+from .models import Post, Bookmark
 from .serializers import PostSerializer, PostDetailSerializer
 from rest_framework.response import Response
-
+from rest_framework.decorators import api_view
+from django.shortcuts import get_object_or_404
 
 class PostList(generics.ListCreateAPIView):
     serializer_class = PostSerializer
@@ -78,26 +79,69 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         
     def perform_create(self, serializer):
         ingredients_input = self.request.data.get('ingredients', '')
-        # Zerlegen Sie die Zutaten im Eingabefeld in eine Liste
+        # split ingredients entry in list
         ingredients_input = ingredients_input.split(',')
-        # Wenn es bereits vorhandene Inhalte gibt, füge das Neue hinzu
+        # if entries there, update them
         if serializer.instance and serializer.instance.ingredients:
             existing_ingredients = serializer.instance.ingredients.split(',')
 
-        # Erstellen Sie eine neue Liste, die die Zutaten aus dem Eingabefeld und dem Post enthält
+        # create new list with ingredients from input field
             ingredients = existing_ingredients + ingredients_input
 
-        # Entfernen Sie doppelte Zutaten aus der Liste
+        # delete double entries
             ingredients = list(set(ingredients))
         else:
             ingredients = ingredients_input
 
 
-        # Setzen Sie das 'ingredients' im Serializer auf die kombinierten Werte
+        # sets 'ingredients' in Serializer to combined values
         serializer.validated_data['ingredients'] = ', '.join(ingredients)
 
-        # Führen Sie die Standard-Perform-Create-Methode aus
+        # save data
         instance = serializer.save(owner=self.request.user)
 
-        # Hinweis: Lassen Sie das 'ingredients' im Serializer unverändert
+        
         serializer.validated_data['ingredients'] = instance.ingredients
+    
+    def patch(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+    
+    # Bookmark handling
+        bookmark_checkbox = serializer.validated_data.get('bookmark_checkbox', False)
+        if bookmark_checkbox:
+            user = request.user
+            if not instance.bookmark_set.filter(user=user).exists():
+                Bookmark.objects.create(post=instance, user=user)
+            else:
+                instance.bookmark_set.filter(user=user).delete()
+    
+        self.perform_update(serializer)
+    
+        return Response(serializer.data)
+@api_view(['POST'])
+def bookmark_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    user = request.user
+    
+    if not post.bookmark_set.filter(user=user).exists():
+        Bookmark.objects.create(post=post, user=user)
+        return Response(status=status.HTTP_201_CREATED)
+    
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+@api_view(['DELETE']) 
+def unbookmark_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    user = request.user
+    
+    try:
+        bookmark = Bookmark.objects.get(post=post, user=user)
+        bookmark.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    except Bookmark.DoesNotExist:
+        return Response(status=status.HTTP_400_BAD_REQUEST)

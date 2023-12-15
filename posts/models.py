@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db import connection
 
 
 class Post(models.Model):
@@ -46,3 +47,19 @@ class Post(models.Model):
 
     def __str__(self):
         return f'{self.id} {self.title}'
+    
+class Bookmark(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey('posts.Post', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def get_bookmarks(self):
+        return self.bookmark_set.all()
+    
+def create_bookmark_table():
+    table_name = Bookmark._meta.db_table
+    table_definition = Bookmark._meta.db_table
+    with connection.cursor() as cursor:
+        cursor.execute('CREATE TABLE IF NOT EXISTS %s (%s)' % (table_name, table_definition))
+
+create_bookmark_table()
