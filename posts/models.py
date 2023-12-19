@@ -55,11 +55,3 @@ class Bookmark(models.Model):
     
     def get_bookmarks(self):
         return self.bookmark_set.all()
-    
-#def create_bookmark_table():
-#    table_name = Bookmark._meta.db_table
-#    table_definition = Bookmark._meta.db_table
-#    with connection.cursor() as cursor:
-#        cursor.execute('CREATE TABLE IF NOT EXISTS %s (%s)' % (table_name, table_definition))
-
-#create_bookmark_table()
