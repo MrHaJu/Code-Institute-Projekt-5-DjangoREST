@@ -12,7 +12,7 @@ class PostSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
-    ingredients = serializers.CharField(source='get_formatted_ingredients', read_only=True)
+    ingredients = serializers.CharField(source='get_formatted_ingredients')
     bookmarks_count = serializers.SerializerMethodField()
 
     def validate_image(self, value):

@@ -15,7 +15,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('id', 'owner', 'title', 'created_at', 'updated_at')
     search_fields = ('owner__username', 'title', 'content')  
     list_filter = ('created_at', 'updated_at')  
-    readonly_fields = ('id', 'owner', 'created_at', 'updated_at')
+    readonly_fields = ('id', 'created_at', 'updated_at')
     inlines = [BookmarkInline]  # Hier füge das Inline-Element hinzu
 
 @admin.register(Bookmark)
