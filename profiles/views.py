@@ -40,3 +40,10 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         following_count=Count('owner__following', distinct=True)
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
+    
+    def perform_update(self, serializer):
+        
+        if 'email' in self.request.data:
+            serializer.save(email=self.request.data['email'])
+        else:
+            serializer.save()
