@@ -30,3 +30,15 @@ class ProfileSerializer(serializers.ModelSerializer):
             'content', 'image', 'is_owner', 'following_id',
             'posts_count', 'followers_count', 'following_count', 'email',
         ]
+
+def update(self, instance, validated_data):
+    # Hinzufügen der E-Mail-Aktualisierung
+    instance.email = validated_data.get('email', instance.email)
+
+    # Andere Felder aktualisieren
+    instance.name = validated_data.get('name', instance.name)
+    # ...
+
+    instance.save()
+
+    return instance
