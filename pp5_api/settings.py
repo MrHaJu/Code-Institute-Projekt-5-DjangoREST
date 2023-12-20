@@ -61,7 +61,7 @@ DEBUG = 'DEBUG' in os.environ
 
 ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOSTS'),
-   '127.0.0.1:8000', "127.0.0.1", 'localhost:3000', '8000-mrhaju-codeinstitutepro-cgxcqzi1qtk.ws-eu107.gitpod.io'
+   '127.0.0.1:8000', "127.0.0.1", 'localhost:3000', 'localhost:3001', '8000-mrhaju-codeinstitutepro-cgxcqzi1qtk.ws-eu107.gitpod.io', '3001-mrhaju-codeinstitutepro-cgxcqzi1qtk.ws-eu107.gitpod.io',
 ]
 
 

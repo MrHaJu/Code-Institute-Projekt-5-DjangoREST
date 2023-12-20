@@ -7,6 +7,7 @@ import Recepies from "./pages/Recipes";
 import Settings from "./pages/Settings";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
+import Logout from "./pages/auth/Logout";
 import Footer from "./components/Footer";
 import './api/axiosDefaults'
 import { createContext, useEffect, useState } from "react";
@@ -45,6 +46,7 @@ function App() {
           <Route exact path="/settings" element={<Settings />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/logout" element={<Logout />} />
            {/* Fallback for unknown Routes */}
           <Route path="*" element={<NotFound />} />
         </Routes>

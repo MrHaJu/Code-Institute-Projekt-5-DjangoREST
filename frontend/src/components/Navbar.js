@@ -8,11 +8,11 @@ import {
   faCog,
   faUser,
   faSignIn,
+  faSignOut,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { currentUserContext } from "../App";
-
 export default function Navbar() {
   const currentUser = useContext(currentUserContext)
   
@@ -53,16 +53,21 @@ export default function Navbar() {
   },]
   const loggedInIcons = [
     {currentUser},
-    {
-      name: "Logout",
-      path: "/logout",
-      icon: faUser,
-    },
-    {
+        {
       name: "Profile",
       path: "/Profile",
       icon: faUser,
-    }
+    },
+    {
+      name: "Add Post",
+      path: "/addPost",
+      icon: faUser,
+    },
+    {
+      name: "Logout",
+      path: "/Logout",
+      icon: faSignOut,
+    },
   ]
   return (
     <>
