@@ -61,7 +61,7 @@ DEBUG = 'DEBUG' in os.environ
 
 ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOSTS'),
-   '127.0.0.1:8000', "127.0.0.1",
+   '127.0.0.1:8000', "127.0.0.1", 'localhost:3000', '8000-mrhaju-codeinstitutepro-cgxcqzi1qtk.ws-eu107.gitpod.io'
 ]
 
 
@@ -106,7 +106,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = os.environ.get("CLIENT_ORIGIN")
+CORS_ALLOWED_ORIGINS = [os.environ.get("CLIENT_ORIGIN")]
 
 CORS_ALLOW_CREDENTIALS = True
 
