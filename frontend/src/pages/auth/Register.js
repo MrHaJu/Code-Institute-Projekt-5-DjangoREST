@@ -7,10 +7,10 @@ import axios from "axios";
     const [signUpData, setSignUpData] = useState ({
       username: '',
       email: '',
-      password: '',
-      confirmPassword: ''
+      password1: '',
+      password2: ''
     })
-    const { username, email, password, confirmPassword } = signUpData;
+    const { username, email, password1, password2 } = signUpData;
 
     const [errors, setErrors] = useState({});
     const history = useNavigate();
@@ -72,11 +72,11 @@ import axios from "axios";
           <label htmlFor="password">Password:</label>
           <input
             type="password"
-            id="password"
-            name="password"
+            id="password1"
+            name="password1"
             placeholder="Password"
             autocomplete="current-password"
-            value={password}
+            value={password1}
             onChange={handleChange}
             required
           />
@@ -85,13 +85,13 @@ import axios from "axios";
               {message}
               </div>
           ))}
-          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <label htmlFor="password2">Confirm Password:</label>
           <input
             type="password"
-            id="confirmPassword"
-            name="confirmPassword"
+            id="password2"
+            name="password2"
             placeholder="Confirm Password"
-            value={confirmPassword}
+            value={password2}
             onChange={handleChange}
             required
           />
