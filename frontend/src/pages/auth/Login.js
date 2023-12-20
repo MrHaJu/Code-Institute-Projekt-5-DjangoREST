@@ -6,7 +6,7 @@ import { setCurrentUserContext } from '../../App';
 const Login = () => {
   const setCurrentUser = useContext(setCurrentUserContext)
   const [signInData, setSignInData] = useState({
-    usernameOrEmail: '',
+    username: '',
     password: '',
   });
 
@@ -17,7 +17,7 @@ const Login = () => {
     });
   };
   
-  const { usernameOrEmail, password } = signInData;
+  const { username, password } = signInData;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,14 +39,14 @@ const Login = () => {
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="usernameOrEmail">Username or E-Mail:</label>
+        <label htmlFor="username">Username or E-Mail:</label>
         <input
           type="text"
-          id="usernameOrEmail"
-          name="usernameOrEmail"
+          id="username"
+          name="username"
           placeholder='Username'
           autocomplete="username"
-          value={usernameOrEmail}
+          value={username}
           onChange={handleChange}
           required
         />
