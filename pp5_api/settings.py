@@ -61,7 +61,7 @@ DEBUG = 'DEBUG' in os.environ
 
 ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOSTS'),
-   '127.0.0.1:8000', "127.0.0.1", 'localhost:3000', 'localhost:3001', '8000-mrhaju-codeinstitutepro-cgxcqzi1qtk.ws-eu107.gitpod.io', '3001-mrhaju-codeinstitutepro-cgxcqzi1qtk.ws-eu107.gitpod.io',
+   '*',
 ]
 
 
@@ -106,7 +106,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [os.environ.get("CLIENT_ORIGIN")]
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get("CLIENT_ORIGIN")
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -115,7 +117,7 @@ ROOT_URLCONF = "pp5_api.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [ os.path.join(BASE_DIR, 'staticfiles', 'build')],
+        "DIRS": [  os.path.join(BASE_DIR, 'staticfiles', 'build')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -183,7 +185,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-WHITENOISE_ROOT = BASE_DIR / 'staticfiles/build/'
+WHITENOISE_ROOT = BASE_DIR / 'staticfiles' / 'build'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

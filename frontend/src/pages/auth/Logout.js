@@ -12,7 +12,7 @@ const Logout = () => {
     useEffect(() => {
       const handleSignOut = async () => {
         try {
-          await axios.post('/dj-rest-auth/logout');
+          await axios.post('/dj-rest-auth/logout/');
           setCurrentUser(null);
           // Display the message for 3 seconds before redirecting
           await new Promise((resolve) => setTimeout(resolve, 6000));
