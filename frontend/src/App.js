@@ -9,7 +9,7 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Logout from "./pages/auth/Logout";
 import Footer from "./components/Footer";
-import PostCreateForm from "./pages/posts/PostCreateForm"
+import PostCreateForm from "./pages/auth/posts/PostCreateForm"
 import './api/axiosDefaults'
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";

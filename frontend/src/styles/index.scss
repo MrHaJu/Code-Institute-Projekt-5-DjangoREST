@@ -113,6 +113,9 @@ img {
 @import "partials/recipes-section";
 @import "partials/login";
 @import "partials/register";
+@import "partials/PostCreateForm";
+
+
 
 .options-container {
     box-shadow: 0 5px 10px var(--shadow-color);
@@ -172,6 +175,8 @@ img {
 .container {
     padding-inline: 22vw;
 }
+
+
 
 @media screen and (max-width: 1423px){
     .container {
