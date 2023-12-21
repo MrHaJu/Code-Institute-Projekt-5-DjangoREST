@@ -9,6 +9,7 @@ import {
   faUser,
   faSignIn,
   faSignOut,
+  faSquarePlus
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -60,8 +61,8 @@ export default function Navbar() {
     },
     {
       name: "Add Post",
-      path: "/addPost",
-      icon: faUser,
+      path: "/post/create",
+      icon: faSquarePlus,
     },
     {
       name: "Logout",

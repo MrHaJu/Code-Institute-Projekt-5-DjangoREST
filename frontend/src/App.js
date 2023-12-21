@@ -9,6 +9,7 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Logout from "./pages/auth/Logout";
 import Footer from "./components/Footer";
+import PostCreateForm from "./pages/posts/PostCreateForm"
 import './api/axiosDefaults'
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -47,6 +48,7 @@ function App() {
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/logout" element={<Logout />} />
+          <Route exact path="/post/create" element={<PostCreateForm />} />
            {/* Fallback for unknown Routes */}
           <Route path="*" element={<NotFound />} />
         </Routes>
