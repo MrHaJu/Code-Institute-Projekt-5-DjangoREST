@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { setCurrentUserContext } from '../../App';
 
 const Login = () => {
+  const navigate = useNavigate();
   const setCurrentUser = useContext(setCurrentUserContext)
   const [signInData, setSignInData] = useState({
     username: '',
@@ -24,10 +25,12 @@ const Login = () => {
     try {
       const {data} = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
-      history.push("/");
+      //history.push("/");
     } catch (err) {
       setErrors(err.response?.data);
-    }
+    }finally {
+      // Redirect to the homepage after login
+      navigate('/');}
   };
 
   const history = useNavigate();
