@@ -28,3 +28,48 @@
 .p-4 {
     padding: 4em;
 }
+.post-create-form {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  .image-container {
+    width: 100%;
+    @media (min-width: 768px) {
+      width: 50%;
+    }
+
+    .image-preview {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .upload-label {
+      display: block;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .text-fields-container {
+    width: 100%;
+    @media (min-width: 768px) {
+      width: 50%;
+    }
+
+    .text-fields {
+      text-align: center;
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        margin-right: 10px;
+      }
+    }
+  }
+}

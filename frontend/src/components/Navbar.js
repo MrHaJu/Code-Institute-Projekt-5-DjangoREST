@@ -14,11 +14,17 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { currentUserContext } from "../App";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { 
+  useSetCurrentUser, } from '../contexts/CurrentUserContext';
 export default function Navbar() {
   const currentUser = useContext(currentUserContext)
-  
+  const logout = () => handleSignOut();
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation()
+  const navigate = useNavigate();
+  const setCurrentUser = useSetCurrentUser();
   //Link array
   const links = [
     {
@@ -42,6 +48,7 @@ export default function Navbar() {
   function closeSidebar() {
     setShowSidebar(false);
   }
+  // Displays Icons only for logged out Users
   const loggedOutIcons = [{
     name: "Login",
     path: "/login",
@@ -52,6 +59,7 @@ export default function Navbar() {
     path: "/register",
     icon: faSignIn,
   },]
+  // Displays Icons only for logged in Users
   const loggedInIcons = [
     {currentUser},
         {
@@ -66,10 +74,29 @@ export default function Navbar() {
     },
     {
       name: "Logout",
-      path: "/Logout",
+      onClick: logout,
       icon: faSignOut,
     },
   ]
+
+  
+  const handleSignOut = async () => {
+    console.log('Vor dem Logout:', currentUser);
+    try {
+      await axios.post('/dj-rest-auth/logout/');
+      setCurrentUser(null);
+      console.log('Nach dem Logout:', currentUser);
+      console.log('Ausloggen erfolgreich');
+      
+    } catch (err) {
+      console.log(err);
+    } finally {
+      localStorage.removeItem('authToken');
+      // Redirect to the homepage after logout
+      navigate('/');
+    }
+  };
+
   return (
     <>
       <nav className="navbar container">
@@ -86,19 +113,20 @@ export default function Navbar() {
             <FontAwesomeIcon icon={link.icon} /> {link.name}
             </Link>
           ))}
-           {/* Links for logged in user */}
   {currentUser ? (
+    // Links only for Logged in user
     loggedInIcons.map((link) => (
       <Link
         className={location.pathname === link.path ? "active" : ""}
         to={link.path}
         key={link.name}
+        onClick={link.onClick}
       >
         <FontAwesomeIcon icon={link.icon} /> {link.name}
       </Link>
     ))
   ) : (
-    // Links for logged out user
+    // Links only for logged out user
     loggedOutIcons.map((link) => (
       <Link
         className={location.pathname === link.path ? "active" : ""}

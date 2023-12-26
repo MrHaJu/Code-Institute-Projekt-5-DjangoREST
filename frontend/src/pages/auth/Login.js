@@ -25,7 +25,7 @@ const Login = () => {
     try {
       const {data} = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
-      //history.push("/");
+
     } catch (err) {
       setErrors(err.response?.data);
     }finally {
@@ -33,7 +33,7 @@ const Login = () => {
       navigate('/');}
   };
 
-  const history = useNavigate();
+
   
   const [errors, setErrors] = useState({});
 

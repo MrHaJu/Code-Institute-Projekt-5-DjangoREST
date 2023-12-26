@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { //useCurrentUser,
+import { 
   useSetCurrentUser, } from '../../contexts/CurrentUserContext';
 import axios from 'axios';
-//import { currentUserContext } from '../../App';
-
 
 const Logout = () => {
     const navigate = useNavigate();
@@ -32,12 +30,7 @@ const Logout = () => {
       handleSignOut();
     }, [navigate, setCurrentUser]);
   
-    return (
-      <div>
-        <h2>Logout</h2>
-        <p>You have been successfully logged out.</p>
-      </div>
-    );
+    
   };
   
   export default Logout;

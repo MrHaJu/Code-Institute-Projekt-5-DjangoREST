@@ -11,7 +11,7 @@ export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const handleMount = async () => {
     try {
@@ -34,7 +34,7 @@ export const CurrentUserProvider = ({ children }) => {
         } catch (err) {
           setCurrentUser((prevCurrentUser) => {
             if (prevCurrentUser) {
-              history.push("/signin");
+              navigate("/signin");
             }
             return null;
           });
@@ -56,7 +56,7 @@ export const CurrentUserProvider = ({ children }) => {
           } catch (err) {
             setCurrentUser((prevCurrentUser) => {
               if (prevCurrentUser) {
-                history.push("/signin");
+                navigate("/signin");
               }
               return null;
             });
@@ -66,7 +66,7 @@ export const CurrentUserProvider = ({ children }) => {
         return Promise.reject(err);
       }
     );
-  }, [history]);
+  }, [navigate]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
