@@ -14,17 +14,17 @@ import './api/axiosDefaults'
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import PostPage from "./pages/auth/posts/PostPage"
-import { useCurrentUser } from "./contexts/CurrentUserContext";
+//import { useCurrentUser } from "./contexts/CurrentUserContext";
 export const currentUserContext = createContext()
 export const setCurrentUserContext = createContext()
 
 
 function App() {
-  const [ /*currentUser,*/ setCurrentUser] = useState(
+  const [ currentUser, setCurrentUser] = useState(
     null
   )
   
-  const currentUser = useCurrentUser();
+  //const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id || "";
 
   const handleMount = async () => {
