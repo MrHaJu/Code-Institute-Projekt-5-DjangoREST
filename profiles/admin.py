@@ -4,11 +4,19 @@ from posts.models import Post, Bookmark
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'email']  
+    readonly_fields = ('id', 'created_at', 'updated_at')
 
 class BookmarkInline(admin.TabularInline):  
     model = Bookmark
     extra = 0  
     readonly_fields = ('user', 'created_at')  
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('owner', 'created_at', 'updated_at')
+    readonly_fields = ('id', 'created_at', 'updated_at')
+
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -16,7 +24,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('owner__username', 'title', 'content')  
     list_filter = ('created_at', 'updated_at')  
     readonly_fields = ('id', 'created_at', 'updated_at')
-    inlines = [BookmarkInline]  # Hier füge das Inline-Element hinzu
+    inlines = [BookmarkInline]  
 
 @admin.register(Bookmark)
 class BookmarkAdmin(admin.ModelAdmin):

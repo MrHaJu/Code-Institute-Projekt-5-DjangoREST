@@ -4,7 +4,11 @@ import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../../components/Avatar";
 import { axiosRes } from '../../../api/axiosDefaults';
-
+import {
+  faHeart,
+  faComments,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Post = (props) => {
     const {
@@ -25,6 +29,7 @@ const Post = (props) => {
     } = props;
 
     const currentUser = useCurrentUser();
+    console.log(currentUser);
   const is_owner = currentUser?.username === owner;
 
   const handleLike = async () => {
@@ -73,7 +78,7 @@ const Post = (props) => {
       </Media>
     </Card.Body>
     <Link to={`/posts/${id}`}>
-      <Card.Img src={image} alt={title} />
+      <Card.Img className="PostImage" src={image} alt={title} />
     </Link>
     <Card.Body>
       {title && <Card.Title className="text-center">{title}</Card.Title>}
@@ -93,19 +98,19 @@ const Post = (props) => {
           </span>
         ) : currentUser ? (
           <span onClick={handleLike}>
-            <i className="far fa-heart HeartOutline" />
+            <FontAwesomeIcon icon={faHeart} className="HeartOutline" />
           </span>
         ) : (
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip>Log in to like posts!</Tooltip>}
           >
-            <i className="far fa-heart" />
+            <FontAwesomeIcon icon={faHeart} />
           </OverlayTrigger>
         )}
         {likes_count}
         <Link to={`/posts/${id}`}>
-          <i className="far fa-comments" />
+        <FontAwesomeIcon icon={faComments} />
         </Link>
         {comments_count}
       </div>

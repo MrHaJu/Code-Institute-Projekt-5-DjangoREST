@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { setCurrentUserContext } from "../App";
 import { currentUserContext } from "../App";
 
+//import Avatar from "./Avatar";
 export default function Navbar() {
   
   const setCurrentUser = useContext(setCurrentUserContext);
