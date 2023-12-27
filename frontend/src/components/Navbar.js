@@ -10,6 +10,8 @@ import {
   faSignIn,
   faSignOut,
   faSquarePlus,
+  faHeart,
+  faBook,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -74,6 +76,16 @@ export default function Navbar() {
       name: "Add Post",
       path: "/post/create",
       icon: faSquarePlus,
+    },
+    {
+      name: "Liked",
+      path: "/liked",
+      icon: faHeart,
+    },
+    {
+      name: "Bookmarked",
+      path: "/bookmarked",
+      icon: faBook,
     },
     {
       name: "Logout",
