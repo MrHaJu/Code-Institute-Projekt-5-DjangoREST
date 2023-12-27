@@ -1,122 +1,51 @@
 
 import PreviousSearches from "../components/previousSearches"
-import React from 'react'
-import { useCurrentUser } from '../contexts/CurrentUserContext';
-import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link } from "react-router-dom";
-//import Avatar from "../components/Avatar";
-import { axiosRes } from '../api/axiosDefaults';
+import React, { useEffect, useState} from "react";
+
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+
+import { useParams} from "react-router"
+import { axiosReq } from "../api/axiosDefaults"
+import Post from "./auth/posts/Post";
 
 
-const Recipes = (props) => {
-    const {
-        id,
-        owner,
-        profile_id,
-        profile_image,
-        comments_count,
-        likes_count,
-        like_id,
-        title,
-        content,
-        ingredients,
-        image,
-        updated_at,
-        postPage,
-        setPosts,
-    } = props;
+function Recipes() {
+  const { id } = useParams();
+    const [post, setPost] = useState({ results: [] });
 
-    const currentUser = useCurrentUser();
-    const is_owner = currentUser?.username === owner
+    useEffect(() => {
+        const handleMount = async () => {
+            try {
+                const [{data: post}] = await Promise.all([
+                    axiosReq.get(`/posts/${id}`)
+                ])
+                setPost({results: [post]})
+                console.log(post)
+            } catch(err) {
+                console.log(err)
+            }
+        };
 
-    const handleLike = async () => {
-      try {
-        const {data} = await axiosRes.post('/likes/', {post:id})
-        setPosts((prevPosts) => ({
-          ...prevPosts,
-          results: prevPosts.results.map((post) => {
-            return post.id === id
-              ? {...post, likes_count: post.likes_count + 1, like_id: data.id}
-              : post;
-          }),
-        }));
-      } catch(err){
-        console.log(err);
-      } 
-    }
-
-    const handleUnlike = async () => {
-      try {
-        await axiosRes.delete(`/likes/${like_id}/`);
-        setPosts((prevPosts) => ({
-          ...prevPosts,
-          results: prevPosts.results.map((post) => {
-            return post.id === id
-              ? {...post, likes_count: post.likes_count - 1, like_id: null}
-              : post;
-          }),
-        }));
-      } catch(err){
-        console.log(err);
-      }
-    }
-
+        handleMount();
+    }, [id]);
   return (
     <main>
             <PreviousSearches />
             <div className="recipes-container">
-                <Card className="Post">
-                <Card.Body>
-                  <Media className="align-items-center justify-content-between">
-                    <Link to={`/profiles/${profile_id}`}>
-                      <image src={profile_image} height={55} />
-                      {owner}
-                    </Link>
-                    <div className="d-flex align-items-center">
-                      <span>{updated_at}</span>
-                      {is_owner && postPage && "..."}
-                    </div>
-                  </Media>
-                </Card.Body>
-                <Link to={`/posts/${id}`}>
-                  <Card.Img src={image} alt={title} />
-                </Link>
-                <Card.Body>
-                  {title && <Card.Title className="text-center">{title}</Card.Title>}
-                  {ingredients && <Card.Text>{ingredients}</Card.Text>}
-                  {content && <Card.Text>{content}</Card.Text>}
-                  <div className="PostBar">
-                    {is_owner ? (
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip>You can't like your own post!</Tooltip>}
-                      >
-                        <i className="far fa-heart" />
-                      </OverlayTrigger>
-                    ) : like_id ? (
-                      <span onClick={handleUnlike}>
-                        <i className="fas fa-heart Heart" />
-                      </span>
-                    ) : currentUser ? (
-                      <span onClick={handleLike}>
-                        <i className="far fa-heart HeartOutline" />
-                      </span>
-                    ) : (
-                      <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip>Log in to like posts!</Tooltip>}
-                      >
-                        <i className="far fa-heart" />
-                      </OverlayTrigger>
-                    )}
-                    {likes_count}
-                    <Link to={`/posts/${id}`}>
-                      <i className="far fa-comments" />
-                    </Link>
-                    {comments_count}
-                  </div>
-                </Card.Body>
-              </Card>
+              <Row className="h-100">
+              <Col className="py-2 p-0 p-lg-2" lg={8}>
+                  <p>Popular profiles for mobile</p>
+                  <Post {...post.results[0]} setPosts={setPost} postPage />
+              <Container className="">
+                  Comments
+              </Container>
+              </Col>
+              <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
+                  Popular profiles for desktop
+              </Col>
+              </Row>
               </div>
         </main>
   );
