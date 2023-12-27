@@ -11,20 +11,21 @@ import {
   faSignOut,
   faSquarePlus,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { setCurrentUserContext } from "../App";
 import { currentUserContext } from "../App";
+
 export default function Navbar() {
+  
   const setCurrentUser = useContext(setCurrentUserContext);
   const currentUser = useContext(currentUserContext);
   const logout = () => handleSignOut();
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  
   //Link array
   const links = [
     {
