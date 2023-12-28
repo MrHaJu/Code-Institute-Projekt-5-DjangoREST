@@ -6,6 +6,7 @@ import Avatar from "../../../components/Avatar";
 import { axiosRes } from '../../../api/axiosDefaults';
 import {
   faHeart,
+  faHeartBroken,
   faComments,
   faBookBookmark,
 } from "@fortawesome/free-solid-svg-icons";
@@ -66,7 +67,7 @@ const Post = (props) => {
       console.log(err);
     }
   };
-  
+
     useEffect(() => {
       
       const fetchBookmarkStatus = async () => {
@@ -127,7 +128,7 @@ const Post = (props) => {
           </OverlayTrigger>
         ) : like_id ? (
           <span onClick={handleUnlike}>
-            <FontAwesomeIcon icon={faHeart} className="HeartOutline" />
+            <FontAwesomeIcon icon={faHeartBroken}  />
           </span>
         ) : currentUser ? (
           <span onClick={handleLike}>
@@ -138,7 +139,7 @@ const Post = (props) => {
             placement="top"
             overlay={<Tooltip>Log in to like posts!</Tooltip>}
           >
-            <FontAwesomeIcon icon={faHeart} className="HeartOutline" />
+            <FontAwesomeIcon icon={faHeartBroken}  />
           </OverlayTrigger>
         )}
         {likes_count}
