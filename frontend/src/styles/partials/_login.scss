@@ -1,3 +1,4 @@
+@import "animations.scss";
 .login-container {
     max-width: 400px;
     margin: 0 auto;
@@ -32,21 +33,9 @@
         align-items: baseline;
         gap: 1em;
     }
+}
+}
 
-    
-    @keyframes shake {
-        0%, 100% {
-          transform: translateX(0);
-        }
-        10%, 30%, 50%, 70%, 90% {
-          transform: translateX(-10px);
-        }
-        20%, 40%, 60%, 80% {
-          transform: translateX(10px);
-        }
-    }
-}
-}
 .alert{
     text-align: center;
     padding-bottom: 10px;
