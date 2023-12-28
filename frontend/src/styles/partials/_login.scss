@@ -33,15 +33,19 @@
         gap: 1em;
     }
 
-    input:invalid {
-        animation: shake 0.5s;
-    }
+    
     @keyframes shake {
-        0%, 100% {transform: translateX(0); }
-        25% { transform: translateX(-10px);}
-        75% { transform: translateX(10px);}
+        0%, 100% {
+          transform: translateX(0);
+        }
+        10%, 30%, 50%, 70%, 90% {
+          transform: translateX(-10px);
+        }
+        20%, 40%, 60%, 80% {
+          transform: translateX(10px);
         }
     }
+}
 }
 .alert{
     text-align: center;
@@ -59,6 +63,7 @@
         padding-bottom: 1em;
     }
 }
+
 h2:first-letter{
     color: var(--primary-color);
 }

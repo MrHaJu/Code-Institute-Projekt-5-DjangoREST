@@ -29,6 +29,10 @@ const Login = () => {
       navigate('/');
     } catch (err) {
       setErrors(err.response?.data);
+      // Set a timeout to clear errors after 5 seconds
+      setTimeout(() => {
+        setErrors({});
+      }, 5000);
     }
   };
 
