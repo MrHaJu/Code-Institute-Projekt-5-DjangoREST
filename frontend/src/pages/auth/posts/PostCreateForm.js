@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -71,8 +70,8 @@ function PostCreateForm() {
 
 
   const textFields = (
-    <div className="text-center">
-      <Form.Group>
+    <div className="upload-form">
+      <Form.Group className="Title flex-item">
         <Form.Label>Title</Form.Label>
         <Form.Control
           type="text"
@@ -86,26 +85,11 @@ function PostCreateForm() {
           {message}
           </Alert>
       ))}
-      <Form.Group>
-        <Form.Label>Content</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          name="content"
-          value={content}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors?.title?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-          </Alert>
-      ))}
-      <Form.Group>
+      <Form.Group className="Ingredients flex-item">
         <Form.Label>Ingredients</Form.Label>
         <Form.Control
           as="textarea"
-          rows={6}
+          rows={10}
           name="ingredients"
           value={ingredients}
           onChange={handleChange}
@@ -116,23 +100,40 @@ function PostCreateForm() {
           {message}
           </Alert>
       ))}
-      <Button
+      <Form.Group className="Content flex-item">
+        <Form.Label>Content</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={10}
+          name="content"
+          value={content}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.title?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+          </Alert>
+      ))}
+      <div className="buttons flex-item">
+      <button
         className="btn"
         onClick={handleGoBack}
       >
         cancel
-      </Button>
-      <Button className="btn" type="submit">
+      </button>
+      <button className="btn" type="submit">
         create
-      </Button>
+      </button>
+      </div>
     </div>
   );
 
   return (
     <Form className="post-create-form" onSubmit={handleSubmit}>
       <Row>
-        <Col className="image-container">
-          <Container className="Container">
+        <Col className="">
+          <Container>
             <Form.Group className="image-preview">
               {image ? (
                 <>
@@ -141,7 +142,7 @@ function PostCreateForm() {
                   </figure>
                   <div>
                     <Form.Label
-                      className="btn"
+                      className="image-text"
                       htmlFor="image-upload"
                     >
                       Change the image
@@ -161,6 +162,7 @@ function PostCreateForm() {
               )}
   
               <Form.File
+              className="upload"
                 id="image-upload"
                 accept="image/*"
                 onChange={handleChangeImage}
@@ -174,9 +176,9 @@ function PostCreateForm() {
             ))}
           </Container>
         </Col>
-        <Col md={5} lg={4} className="text-fields">
-          <Container className="Container">{textFields}</Container>
-        </Col>
+        <div className="text-fields">
+          <div className="Container">{textFields}</div>
+        </div>
       </Row>
     </Form>
   );

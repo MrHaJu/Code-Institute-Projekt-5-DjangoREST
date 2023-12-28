@@ -51,6 +51,7 @@ function App() {
           <Route exact path="/recipes" element={<Recepies message="No results found. Adjust the search keyword."  />} />
           <Route exact path="/recipes" element={<Recepies message="No results found. Adjust the search Keyword or follow a user." filter={`owner__followed__owner__profile=${profile_id}&`} />} />
           <Route exact path="/liked" element={<Recepies message="No results found. Adjust the search Keyword or like a post." filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`} />} />
+          <Route exact path="/bookmarked" element={<Recepies message="No results found. Bookmark a post." filter={`bookmark__owner__profile=${profile_id}&ordering=-bookmark__created_at&`} />} />
           <Route exact path="/posts/:id" render={<PostPage />} />
           <Route exact path="/settings" element={<Settings />} />
           <Route exact path="/register" element={<Register />} />

@@ -1,13 +1,71 @@
 .Image {
-    max-height: 40vh;
-    max-width: 100%;
-    object-fit: contain;
+  display: inline;
+  align-items: center;
+  justify-items: center;
+  height: 250px;
+  width: 100%;
+  object-fit: contain;
+}
+.image-text {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.Title {
+  Label{
+    display: block;
+    font-weight: bold;
+    color: var(--text-color);
   }
-  
-  .Container {
-    min-height: 343px;
+}
+.Ingredients {
+  Label{
+    display: block;
+    font-weight: bold;
+    color: var(--text-color);
   }
-  
+}
+.Content {
+  Label{
+    display: block;
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  margin-bottom: 1em;
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1em;
+  max-width: 20%;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content:center;
+  gap: 5px;
+  min-height: 343px;
+  min-width: 50%;
+}
+
+.flex-item {
+  flex: 0 1 26%; 
+  margin: 5px;
+  gap: 1em;
+  text-align: center;
+}
+
+.flex-item:nth-child(4) {
+  order: 1;
+}
+
+
 .Asset {
     display: flex;
     flex-direction: column;
@@ -16,7 +74,11 @@
     min-height: 120px;
   }
 
-
+.upload {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
 
 .mt-4 {
     margin-top: 4em;
@@ -28,12 +90,11 @@
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-
+  
   .image-container {
     width: 100%;
+    align-items: center;
+    justify-content: center;
     @media (min-width: 768px) {
       width: 50%;
     }
@@ -50,22 +111,4 @@
     }
   }
 
-  .text-fields-container {
-    width: 100%;
-    @media (min-width: 768px) {
-      width: 50%;
-    }
-
-    .text-fields {
-      text-align: center;
-
-      .form-group {
-        margin-bottom: 20px;
-      }
-
-      .btn {
-        margin-right: 10px;
-      }
-    }
-  }
 }

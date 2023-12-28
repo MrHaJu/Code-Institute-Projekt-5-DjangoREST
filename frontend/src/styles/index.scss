@@ -201,17 +201,17 @@ img {
 }
 
 .container {
-    padding-inline: 22vw;
+    padding-inline: 12vw;
 }
 
 
 
-@media screen and (max-width: 1423px){
+@media screen and (max-width: 1552px){
     .container {
-        padding-inline: 18vw;
+        padding-inline: 2vw;
     }
 }
-@media screen and (max-width: 1049px){
+@media screen and (max-width: 1229px){
     .navbar{
             .nav-links  {
                 display: none;
@@ -253,12 +253,7 @@ img {
             }
         }
 }
-@media screen and (max-width: 1246px){
-    .container {
-        padding-inline: 12vw;
-    }
-    
-}
+
 
 @media screen and (max-width: 480px){
     .container {
