@@ -25,15 +25,21 @@ const Login = () => {
     try {
       const {data} = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
-
+      // Redirect to the homepage after login
+      navigate('/');
     } catch (err) {
       setErrors(err.response?.data);
-    }finally {
-      // Redirect to the homepage after login
-      navigate('/');}
+    }
   };
 
-
+  const togglePasword = () => {
+    const passwordInput = document.getElementById("password");
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+    } else {
+      passwordInput.type = "password";
+    }
+  };
   
   const [errors, setErrors] = useState({});
 
@@ -42,7 +48,7 @@ const Login = () => {
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username or E-Mail:</label>
+        <label htmlFor="username">Username:</label>
         <input
           type="text"
           id="username"
@@ -69,12 +75,20 @@ const Login = () => {
           onChange={handleChange}
           required
         />
+        <div className="password-checkbox">
+          <label htmlFor="checkbox">Show Password </label>
+          <input id='checkbox' type='checkbox' onClick={togglePasword}/>
+        </div>
         {errors.password?.map((message, idx) => (
             <div className="alert alert-warning" key={idx}>
               {message}
               </div>
           ))}
-
+        {errors.non_field_errors?.map((message, idx) => (
+            <div className="alert alert-warning" key={idx}>
+              {message}
+              </div>
+          ))}
         <button className="btn" type="submit">Login</button>
       </form>
     </div>
@@ -83,11 +97,7 @@ const Login = () => {
     <Link className="btn" to="/register">
             Sign up now!
           </Link>
-          {errors.non_field_errors?.map((message, idx) => (
-            <div className="alert alert-warning" key={idx}>
-              {message}
-              </div>
-          ))}
+          
     </div>
     </main>
   );

@@ -2,7 +2,7 @@
 import PreviousSearches from "../components/previousSearches";
 import React, { useEffect, useState } from "react";
 import Asset from "../components/Asset";
-import Form from "react-bootstrap/Form";
+//import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
@@ -35,35 +35,36 @@ function Recipes({ message, filter = "" }) {
       setHasLoaded(false);
       fetchPosts();
     }, [filter, pathname]);
+
     return (
         <main>
             <PreviousSearches />
             <div className="recipes-container">
-            <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles mobile</p>
-        {hasLoaded ? (
-          <>
-            {posts.results.length ? (
-              posts.results.map((post) => (
-                <Post key={post.id} {...post} setPosts={setPosts} />
-              ))
-            ) : (
-              <Container className="Content">
-                <Asset src={NoResults} message={message} />
-              </Container>
-            )}
-          </>
-        ) : (
-          <Container className="Content">
-            <Asset spinner />
-          </Container>
-        )}
-      </Col>
-      <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        <p>Popular profiles for desktop</p>
-      </Col>
-    </Row>
+              <Row className="h-100">
+                <Col className="py-2 p-0 p-lg-2" lg={8}>
+                  <p>Popular profiles mobile</p>
+                  {hasLoaded ? (
+                    <>
+                      {posts.results.length ? (
+                      posts.results.map((post) => (
+                        <Post key={post.id} {...post} setPosts={setPosts} />
+                      ))
+                    ) : (
+                      <Container className="Content">
+                        <Asset src={NoResults} message={message} />
+                      </Container>
+                    )}
+                  </>
+                  ) : (
+                    <Container className="Content">
+                      <Asset spinner />
+                    </Container>
+                  )}
+                </Col>
+                <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
+                  <p>Popular profiles for desktop</p>
+                </Col>
+              </Row>
             </div>
         </main>
     );

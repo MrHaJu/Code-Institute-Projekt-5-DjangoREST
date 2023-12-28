@@ -31,9 +31,9 @@ const Post = (props) => {
     postPage,
     setPosts,
   } = props;
-    const [isBookmarked, setIsBookmarked] = useState(false);
-    const currentUser = useCurrentUser();
-    console.log(currentUser);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const currentUser = useCurrentUser();
+  console.log(currentUser);
   const is_owner = currentUser?.username === owner;
 
   const handleLike = async () => {
@@ -124,31 +124,31 @@ const Post = (props) => {
             placement="top"
             overlay={<Tooltip>You can't like your own post!</Tooltip>}
           >
-            <i className="far fa-heart" />
+            <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
           </OverlayTrigger>
         ) : like_id ? (
           <span onClick={handleUnlike}>
-            <FontAwesomeIcon icon={faHeartBroken}  />
+            <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
           </span>
         ) : currentUser ? (
           <span onClick={handleLike}>
-            <FontAwesomeIcon icon={faHeart} />
+            <FontAwesomeIcon icon={faHeart} className='Icons red' />
           </span>
         ) : (
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip>Log in to like posts!</Tooltip>}
           >
-            <FontAwesomeIcon icon={faHeartBroken}  />
+            <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
           </OverlayTrigger>
         )}
         {likes_count}
         <Link to={`/posts/${id}`}>
-        <FontAwesomeIcon icon={faComments} />
+        <FontAwesomeIcon icon={faComments} className='Icons' />
         </Link>
         {comments_count}
-        <span onClick={handleBookmark}>
-            <FontAwesomeIcon icon={faBookBookmark}>
+        <span onClick={handleBookmark} className={`Post ${isBookmarked ? 'active-bookmark' : 'inactive-bookmark'}`}>
+            <FontAwesomeIcon icon={faBookBookmark} className='Icons'>
               {isBookmarked ? '/Unbookmark/' : '/bookmark/'}
             </FontAwesomeIcon>
             {bookmark_count}
