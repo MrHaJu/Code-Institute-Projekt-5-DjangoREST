@@ -14,7 +14,7 @@ import axios from "axios";
 
     const [errors, setErrors] = useState({});
     const history = useNavigate();
-
+    
     const  handleChange = (event) => {
       setSignUpData({
       ...signUpData,
@@ -33,7 +33,26 @@ import axios from "axios";
         setErrors(err.response?.data);
       }
     }
-
+    const togglePassword = () => {
+      const passwordInput1 = document.getElementById("password1");
+      const passwordInput2 = document.getElementById("password2");
+    
+      if (passwordInput1 && passwordInput2) {
+        // Toggle visibility for password1
+        if (passwordInput1.type === "password") {
+          passwordInput1.type = "text";
+        } else {
+          passwordInput1.type = "password";
+        }
+    
+        // Toggle visibility for password2
+        if (passwordInput2.type === "password") {
+          passwordInput2.type = "text";
+        } else {
+          passwordInput2.type = "password";
+        }
+      }
+    };
   return (
     <main>
       <div className="register-container">
@@ -82,6 +101,7 @@ import axios from "axios";
             onChange={handleChange}
             required
           />
+          
           {errors.password?.map((message, idx) => (
             <div className="alert alert-warning" key={idx}>
               {message}
@@ -97,6 +117,10 @@ import axios from "axios";
             onChange={handleChange}
             required
           />
+          <div className="password-checkbox">
+          <label htmlFor="checkbox">Show Password </label>
+          <input id="checkbox" type="checkbox" onClick={togglePassword} />
+          </div>
           {errors.confirmPassword?.map((message, idx) => (
             <div className="alert alert-warning" key={idx}>
               {message}
