@@ -26,7 +26,8 @@ import axios from "axios";
       event.preventDefault();
       try {
         await axios.post('/dj-rest-auth/registration/', signUpData)
-        history.push('/signin')
+        history('/login')
+        console.log('Registrierung erfolgreich')
       } catch(err){
         console.log(err)
         setErrors(err.response?.data);
@@ -70,7 +71,7 @@ import axios from "axios";
               {message}
               </div>
           ))}
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password1">Password:</label>
           <input
             type="password"
             id="password1"
