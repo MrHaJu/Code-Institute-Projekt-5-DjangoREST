@@ -24,6 +24,7 @@ export default function Navbar() {
   
   const setCurrentUser = useContext(setCurrentUserContext);
   const currentUser = useContext(currentUserContext);
+  
   const logout = () => handleSignOut();
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();

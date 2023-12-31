@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useCurrentUser } from '../../../contexts/CurrentUserContext';
+import React, { useContext, useState, useEffect } from 'react'
+import { currentUserContext } from "../../../App";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../../components/Avatar";
@@ -32,10 +32,15 @@ const Post = (props) => {
     setPosts,
   } = props;
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const currentUser = useCurrentUser();
-  console.log(currentUser);
-  const is_owner = currentUser?.username === owner;
+  const currentUser = useContext(currentUserContext);
+  const username = currentUser.username
+  
+  console.log(username);
+  console.log(post_id);
 
+  
+  const is_owner = currentUser?.owner === owner;
+  
   const handleLike = async () => {
     try {
       const { data } = await axiosRes.post("/likes/", { post: id });
@@ -72,8 +77,8 @@ const Post = (props) => {
       
       const fetchBookmarkStatus = async () => {
         try {
-          const response = await axios.get(`/bookmark_status/${post_id}/`);
-          setIsBookmarked(response.data.is_bookmarked);
+          const response = await axios.get(`/bookmark/${post_id}/`);
+          setIsBookmarked(response.data.bookmarked);
         } catch (error) {
           console.error('Fehler beim Laden des Bookmark-Status', error);
         }
@@ -128,11 +133,11 @@ const Post = (props) => {
           </OverlayTrigger>
         ) : like_id ? (
           <span onClick={handleUnlike}>
-            <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
+            <FontAwesomeIcon icon={faHeart} className='Icons red' />
           </span>
         ) : currentUser ? (
           <span onClick={handleLike}>
-            <FontAwesomeIcon icon={faHeart} className='Icons red' />
+            <FontAwesomeIcon icon={faHeartBroken} className='Icons ' />
           </span>
         ) : (
           <OverlayTrigger

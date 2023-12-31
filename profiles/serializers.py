@@ -5,6 +5,7 @@ from likes.models import Like
 
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+    name = serializers.ReadOnlyField()
     is_owner = serializers.SerializerMethodField()
     following_id = serializers.SerializerMethodField()
     posts_count = serializers.ReadOnlyField()
