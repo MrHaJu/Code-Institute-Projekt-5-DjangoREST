@@ -5,8 +5,9 @@ from pp5_api.permissions import IsOwnerOrReadOnly
 from .models import Post, Bookmark
 from .serializers import PostSerializer, PostDetailSerializer
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
 
 class PostList(generics.ListCreateAPIView):
     serializer_class = PostSerializer
@@ -94,3 +95,16 @@ def unbookmark_post(request, post_id):
         return Response(status=status.HTTP_204_NO_CONTENT)
     except Bookmark.DoesNotExist:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def post_bookmark_status(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    user = request.user
+
+
+    bookmarked = post.bookmark_set.filter(user=user).exists()
+
+
+    data = {'bookmarked': bookmarked}
+    return Response(data)

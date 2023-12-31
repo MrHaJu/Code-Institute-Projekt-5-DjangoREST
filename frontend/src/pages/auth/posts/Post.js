@@ -16,7 +16,7 @@ const Post = (props) => {
   const {
     id,
     owner,
-    post_id,
+    //post_id,
     profile_id,
     profile_image,
     comments_count,
@@ -31,13 +31,13 @@ const Post = (props) => {
     postPage,
     setPosts,
   } = props;
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(null);
   const currentUser = useContext(currentUserContext);
-  const username = currentUser.username
-  
-  console.log(username);
-  console.log(post_id);
-
+  //const username = currentUser.username
+  const post_id = id
+  //console.log(currentUser.username);
+  //console.log(post_id);
+  console.log(setIsBookmarked)
   
   const is_owner = currentUser?.owner === owner;
   
@@ -74,11 +74,10 @@ const Post = (props) => {
   };
 
     useEffect(() => {
-      
       const fetchBookmarkStatus = async () => {
         try {
-          const response = await axios.get(`/bookmark/${post_id}/`);
-          setIsBookmarked(response.data.bookmarked);
+          const response = await axios.get(`/posts/${post_id}/bookmark_status/`);
+          setIsBookmarked(response.data.bookmarked); 
         } catch (error) {
           console.error('Fehler beim Laden des Bookmark-Status', error);
         }
@@ -91,10 +90,10 @@ const Post = (props) => {
       try {
         if (isBookmarked) {
           
-          await axios.delete(`/unbookmark/${post_id}/`);
+          await axios.delete(`/posts/${post_id}/unbookmark/`);
         } else {
           
-          await axios.post(`/bookmark/${post_id}/`);
+          await axios.post(`/posts/${post_id}/bookmark/`);
         }
         setIsBookmarked(!isBookmarked);
       } catch (error) {
