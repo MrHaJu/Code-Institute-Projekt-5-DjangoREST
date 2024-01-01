@@ -20,7 +20,7 @@ const Post = (props) => {
     profile_id,
     profile_image,
     comments_count,
-    bookmark_count,
+    bookmarks_count,
     likes_count,
     like_id,
     title,
@@ -33,12 +33,7 @@ const Post = (props) => {
   } = props;
   const [isBookmarked, setIsBookmarked] = useState(null);
   const currentUser = useContext(currentUserContext);
-  //const username = currentUser.username
   const post_id = id
-  //console.log(currentUser.username);
-  //console.log(post_id);
-  console.log(setIsBookmarked)
-  
   const is_owner = currentUser?.owner === owner;
   
   const handleLike = async () => {
@@ -74,17 +69,20 @@ const Post = (props) => {
   };
 
     useEffect(() => {
+      if (currentUser) {
       const fetchBookmarkStatus = async () => {
         try {
-          const response = await axios.get(`/posts/${post_id}/bookmark_status/`);
-          setIsBookmarked(response.data.bookmarked); 
+          
+            const response = await axios.get(`/posts/${post_id}/bookmark_status/`);
+            setIsBookmarked(response.data.bookmarked);
+          
         } catch (error) {
           console.error('Fehler beim Laden des Bookmark-Status', error);
         }
       };
   
-      fetchBookmarkStatus();
-    }, [post_id]);
+      fetchBookmarkStatus();}
+    }, [post_id, currentUser]);
   
     const handleBookmark = async () => {
       try {
@@ -98,7 +96,7 @@ const Post = (props) => {
         setIsBookmarked(!isBookmarked);
       } catch (error) {
         console.error('Fehler beim Aktualisieren des Bookmarks', error);
-      }
+      } 
     };
 
   return (
@@ -129,14 +127,17 @@ const Post = (props) => {
             overlay={<Tooltip>You can't like your own post!</Tooltip>}
           >
             <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
+            {likes_count}
           </OverlayTrigger>
         ) : like_id ? (
           <span onClick={handleUnlike}>
             <FontAwesomeIcon icon={faHeart} className='Icons red' />
+            {likes_count}
           </span>
         ) : currentUser ? (
           <span onClick={handleLike}>
             <FontAwesomeIcon icon={faHeartBroken} className='Icons ' />
+            {likes_count}
           </span>
         ) : (
           <OverlayTrigger
@@ -144,22 +145,22 @@ const Post = (props) => {
             overlay={<Tooltip>Log in to like posts!</Tooltip>}
           >
             <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
+            
           </OverlayTrigger>
         )}
-        {likes_count}
+        
         <Link to={`/posts/${id}`}>
         <FontAwesomeIcon icon={faComments} className='Icons' />
-        </Link>
         {comments_count}
-        <span onClick={handleBookmark} className={`Post ${isBookmarked ? 'active-bookmark' : 'inactive-bookmark'}`}>
-            <FontAwesomeIcon icon={faBookBookmark} className='Icons'>
-              {isBookmarked ? '/Unbookmark/' : '/bookmark/'}
-            </FontAwesomeIcon>
-            {bookmark_count}
-          </span>
-        
-      </div>
-    </Card.Body>
+        </Link>
+        {currentUser && (
+            <span onClick={handleBookmark} className='Book'>
+              <FontAwesomeIcon icon={faBookBookmark} className={`Post ${isBookmarked ? 'active-bookmark' : 'inactive-bookmark'} Icons`} />
+              {bookmarks_count}
+            </span>
+          )}
+        </div>
+      </Card.Body>
   </Card>
   );
 };

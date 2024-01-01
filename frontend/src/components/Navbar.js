@@ -86,7 +86,7 @@ export default function Navbar() {
     },
     {
       name: "Bookmarked",
-      path: "/bookmarked",
+      path: "/bookmarked-posts",
       icon: faBook,
     },
     {
