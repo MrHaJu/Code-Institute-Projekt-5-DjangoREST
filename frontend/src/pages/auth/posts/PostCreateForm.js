@@ -10,7 +10,6 @@ import Upload from "../../../assets/upload.png";
 import Asset from "../../../components/Asset";
 import { Image } from "react-bootstrap";
 import { useNavigate } from "react-router";
-//import axios from "axios";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Alert from "react-bootstrap/Alert";
 
@@ -28,7 +27,6 @@ function PostCreateForm() {
   const imageInput = useRef(null);
   const navigate = useNavigate();
   const handleGoBack = () => {
-    // Überprüfe, ob es eine vorherige Seite gibt, bevor du zurücknavigierst
     window.history.length > 1 && navigate(-1);
   };
   const handleChange = (event) => {
