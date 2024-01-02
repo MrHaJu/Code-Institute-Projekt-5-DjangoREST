@@ -11,11 +11,16 @@ function PostPage() {
     const { id } = useParams();
     const [post, setPost] = useState({ results: [] });
 
+console.log("ID",id);
+console.log("Post", post);
+console.log("_________");
+console.log();
+
     useEffect(() => {
         const handleMount = async () => {
             try {
                 const [{data: post}] = await Promise.all([
-                    axiosReq.get(`/posts/${id}`)
+                    axiosReq.get(`/recipes/${id}`)
                 ])
                 setPost({results: [post]})
                 console.log(post)
@@ -27,15 +32,15 @@ function PostPage() {
         handleMount();
     }, [id]);
     return (
-        <Row className="h-100">
-            <Col className="py-2 p-0 p-lg-2" lg={8}>
+        <Row className="">
+            <Col className="" lg={8}>
                 <p>Popular profiles for mobile</p>
                 <Post {...post.results[0]} setPosts={setPost} postPage />
             <Container className="">
                 Comments
             </Container>
             </Col>
-            <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
+            <Col lg={4} className="">
                 Popular profiles for desktop
             </Col>
         </Row>
