@@ -47,3 +47,18 @@
   margin-bottom: 10px;
   gap: 10px;
 }
+
+.PostHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.Text-left {
+  text-align: left;
+}
+
+.Text-center {
+  text-align: center;
+}
