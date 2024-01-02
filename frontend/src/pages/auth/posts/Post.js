@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { currentUserContext } from "../../../App";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "../../../components/Avatar";
 import { axiosRes } from '../../../api/axiosDefaults';
 import {
@@ -12,6 +12,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
+import { MoreDropdown } from '../../../components/MoreDropdown';
+
+
+
+
 const Post = (props) => {
   const {
     id,
@@ -28,14 +33,39 @@ const Post = (props) => {
     ingredients,
     image,
     updated_at,
-    postPage,
+    //postPage,
     setPosts,
   } = props;
   const [isBookmarked, setIsBookmarked] = useState(null);
   const currentUser = useContext(currentUserContext);
   const post_id = id
-  const is_owner = currentUser?.owner === owner;
-  
+  const is_owner = currentUser && currentUser.username === owner;
+  const navigate = useNavigate();
+  const postPage = true
+
+  console.log("________________")
+  console.log("CurrentUser", currentUser && currentUser.username)
+  console.log("Post Owner",owner)
+  console.log("Is Currentuser Post owner",is_owner)
+  console.log("PostPage",postPage)
+  console.log("Post id", post_id)
+  //const handleGoBack =() => {
+  //  navigate(-1);
+  //}
+
+  const handleEdit = () => {
+    navigate(`/recipes/${id}/edit`);
+  }
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/recipes/${id}/`);
+      navigate(-1);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const handleLike = async () => {
     try {
       const { data } = await axiosRes.post("/likes/", { post: id });
@@ -102,32 +132,37 @@ const Post = (props) => {
   return (
     <Card className="Post">
     <Card.Body>
-      <Media className="align-items-center justify-content-between">
+      <Media className="PostHead">
         <Link to={`/profiles/${profile_id}`}>
           <Avatar src={profile_image} height={55} />
           {owner}
         </Link>
         <div className="d-flex align-items-center">
           <span>{updated_at}</span>
-          {is_owner && postPage && "..."}
+          {is_owner && postPage && <MoreDropdown 
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+          isOwner={is_owner}/>}
         </div>
       </Media>
     </Card.Body>
-    <Link to={`/posts/${id}`}>
+    <Link to={`/recipes/${id}`}>
       <Card.Img className="PostImage" src={image} alt={title} />
     </Link>
     <Card.Body>
-      {title && <Card.Title className="text-center">{title}</Card.Title>}
-      {ingredients && <Card.Text>{ingredients}</Card.Text>}
-      {content && <Card.Text>{content}</Card.Text>}
+      {title && <Card.Title className="Text-center">{title}</Card.Title>}
+      {ingredients && <Card.Text className='Text-left'>{ingredients}</Card.Text>}
+      {content && <Card.Text className='Text-left'>{content}</Card.Text>}
       <div className="PostBar">
         {is_owner ? (
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip>You can't like your own post!</Tooltip>}
           >
+            <div>
             <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
             {likes_count}
+            </div>
           </OverlayTrigger>
         ) : like_id ? (
           <span onClick={handleUnlike}>
@@ -136,20 +171,21 @@ const Post = (props) => {
           </span>
         ) : currentUser ? (
           <span onClick={handleLike}>
-            <FontAwesomeIcon icon={faHeartBroken} className='Icons ' />
-            {likes_count}
+              <FontAwesomeIcon icon={faHeartBroken} className='Icons ' />
+              {likes_count}
           </span>
         ) : (
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip>Log in to like posts!</Tooltip>}
           >
-            <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
-            
+            <div>
+              <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
+            </div>
           </OverlayTrigger>
         )}
         
-        <Link to={`/posts/${id}`}>
+        <Link to={`/recipes/${id}`}>
         <FontAwesomeIcon icon={faComments} className='Icons' />
         {comments_count}
         </Link>
