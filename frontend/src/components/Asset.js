@@ -4,10 +4,10 @@ import { Spinner } from "react-bootstrap";
 
 const Asset = ({ spinner, src, message }) => {
   return (
-    <div className="Asset p-4">
+    <div className="Asset">
       {spinner && <Spinner animation="border" />}
       {src && <img src={src} alt={message} />}
-      {message && <p className="mt-4">{message}</p>}
+      {message && <p>{message}</p>}
     </div>
   );
 };
