@@ -59,7 +59,7 @@ const Login = () => {
           id="username"
           name="username"
           placeholder='Username'
-          autocomplete="username"
+          autoComplete="username"
           value={username}
           onChange={handleChange}
           required
@@ -75,7 +75,7 @@ const Login = () => {
           id="password"
           name="password"
           placeholder='Password'
-          autocomplete="current-password"
+          autoComplete="current-password"
           value={password}
           onChange={handleChange}
           required
