@@ -62,3 +62,15 @@
 .Text-center {
   text-align: center;
 }
+
+.PostUser {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  gap: 10px;
+}
+
+.PostUser:hover {
+  font-weight: bold;
+}

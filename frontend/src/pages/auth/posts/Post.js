@@ -133,11 +133,11 @@ const Post = (props) => {
     <Card className="Post">
     <Card.Body>
       <Media className="PostHead">
-        <Link to={`/profiles/${profile_id}`}>
+        <Link className='PostUser' to={`/profiles/${profile_id}`}>
           <Avatar src={profile_image} height={55} />
           {owner}
         </Link>
-        <div className="d-flex align-items-center">
+        <div className="PostUser">
           <span>{updated_at}</span>
           {is_owner && postPage && <MoreDropdown 
           handleEdit={handleEdit}
@@ -159,7 +159,7 @@ const Post = (props) => {
             placement="top"
             overlay={<Tooltip>You can't like your own post!</Tooltip>}
           >
-            <div>
+            <div className='PostUser'>
             <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
             {likes_count}
             </div>
@@ -179,19 +179,20 @@ const Post = (props) => {
             placement="top"
             overlay={<Tooltip>Log in to like posts!</Tooltip>}
           >
-            <div>
+            <div className='PostUser'>
               <FontAwesomeIcon icon={faHeartBroken} className='Icons' />
+              {likes_count}
             </div>
           </OverlayTrigger>
         )}
         
-        <Link to={`/recipes/${id}`}>
+        <Link className='PostUser' to={`/recipes/${id}`}>
         <FontAwesomeIcon icon={faComments} className='Icons' />
         {comments_count}
         </Link>
         {currentUser && (
-            <span onClick={handleBookmark} className='Book'>
-              <FontAwesomeIcon icon={faBookBookmark} className={`Post ${isBookmarked ? 'active-bookmark' : 'inactive-bookmark'} Icons`} />
+            <span onClick={handleBookmark} className='PostUser'>
+              <FontAwesomeIcon icon={faBookBookmark} className={`Post ${isBookmarked ? 'active-bookmark' : 'inactive-bookmark'} Icons `} />
               {bookmarks_count}
             </span>
           )}
