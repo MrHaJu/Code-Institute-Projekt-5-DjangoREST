@@ -21,7 +21,7 @@ const Post = (props) => {
   const {
     id,
     owner,
-    //post_id,
+
     profile_id,
     profile_image,
     comments_count,
@@ -33,7 +33,7 @@ const Post = (props) => {
     ingredients,
     image,
     updated_at,
-    //postPage,
+
     setPosts,
   } = props;
   const [isBookmarked, setIsBookmarked] = useState(null);
@@ -43,15 +43,14 @@ const Post = (props) => {
   const navigate = useNavigate();
   const postPage = true
 
-  console.log("________________")
-  console.log("CurrentUser", currentUser && currentUser.username)
-  console.log("Post Owner",owner)
-  console.log("Is Currentuser Post owner",is_owner)
-  console.log("PostPage",postPage)
-  console.log("Post id", post_id)
-  //const handleGoBack =() => {
-  //  navigate(-1);
-  //}
+  //Debug section
+  //console.log("________________")
+  //console.log("CurrentUser", currentUser && currentUser.username)
+  //console.log("Post Owner",owner)
+  //console.log("Is Currentuser Post owner",is_owner)
+  //console.log("PostPage",postPage)
+  //console.log("Post id", post_id)
+
 
   const handleEdit = () => {
     navigate(`/recipes/${id}/edit`);

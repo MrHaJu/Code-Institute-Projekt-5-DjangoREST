@@ -44,7 +44,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
-        comments_count=Count('comment', distinct=True)
+        comments_count=Count('comment', distinct=True),
     ).order_by('-created_at')
 
     def get(self, request, *args, **kwargs):
@@ -54,19 +54,6 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         )
         return Response(serializer.data)
 
-    def perform_update(self, serializer):
-        ingredients_input = self.request.data.get('ingredients', '')
-        ingredients_input = ingredients_input.split(',')
-
-        if serializer.instance and serializer.instance.ingredients:
-            existing_ingredients = serializer.instance.ingredients.split(',')
-            ingredients = existing_ingredients + ingredients_input
-            ingredients = list(set(ingredients))
-        else:
-            ingredients = ingredients_input
-
-        serializer.validated_data['ingredients'] = ', '.join(ingredients)
-        serializer.save(owner=self.request.user)
 
     def delete(self, request, *args, **kwargs):
         post = self.get_object()

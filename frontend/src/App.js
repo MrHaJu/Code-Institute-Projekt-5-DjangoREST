@@ -13,6 +13,8 @@ import './api/axiosDefaults'
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import PostPage from "./pages/auth/posts/PostPage"
+import PostEditForm from "./pages/auth/posts/PostEditForm";
+
 
 export const currentUserContext = createContext()
 export const setCurrentUserContext = createContext()
@@ -51,6 +53,7 @@ function App() {
           <Route exact path="/liked" element={<Recepies message="No results found. Adjust the search Keyword or like a post." filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`} />} />
           <Route exact path="/bookmarked-posts" element={<Recepies message="No results found. Bookmark a post." filter={`isBookmarked=${currentUser?.profile_id || ""}&`} />} />
           <Route exact path="/recipes/:id" render={<PostPage />} />
+          <Route exact path="/recipes/:id/edit" element={<PostEditForm />} />
           <Route exact path="/settings" element={<Settings />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />

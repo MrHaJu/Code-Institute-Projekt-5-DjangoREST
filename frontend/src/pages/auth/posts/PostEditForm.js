@@ -1,19 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-
-import Upload from "../../../assets/upload.png";
-
-import Asset from "../../../components/Asset";
 import { Image } from "react-bootstrap";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Alert from "react-bootstrap/Alert";
 
-function PostCreateForm() {
+function PostEditForm() {
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({
@@ -26,6 +22,20 @@ function PostCreateForm() {
 
   const imageInput = useRef(null);
   const navigate = useNavigate();
+  const { id } = useParams();
+
+    useEffect(() => {
+        const handleMount = async () => {
+            try {
+                const {data} = await axiosReq.get(`/posts/${id}`)
+                const {title, ingredients, content, image, is_owner} = data;
+                is_owner ? setPostData({title, ingredients, content, image }) : navigate("/");
+            } catch(err) {
+                console.log(err)
+            }
+        };
+        handleMount();
+    }, [navigate, id]);
   const handleGoBack = () => {
     window.history.length > 1 && navigate(-1);
   };
@@ -53,11 +63,14 @@ function PostCreateForm() {
     formData.append('title', title);
     formData.append('content', content);
     formData.append('ingredients', ingredients);
+    
+    if (imageInput?.current?.files[0]){
     formData.append('image', imageInput.current.files[0]);
+    }
 
     try {
-      const {data} = await axiosReq.post('/posts/', formData);
-      navigate(`/recipes/${data.id}`)
+      await axiosReq.put(`/posts/${id}/`, formData);
+      navigate(`/recipes/${id}`)
     } catch(err) {
       console.log(err)
       if (err.response?.status !== 401) {
@@ -121,7 +134,7 @@ function PostCreateForm() {
         cancel
       </button>
       <button className="btn" type="submit">
-        create
+        Save
       </button>
       </div>
     </div>
@@ -133,8 +146,7 @@ function PostCreateForm() {
         <Col className="">
           <Container>
             <Form.Group className="image-preview">
-              {image ? (
-                <>
+              
                   <figure>
                     <Image className="Image" src={image} rounded />
                   </figure>
@@ -146,19 +158,6 @@ function PostCreateForm() {
                       Change the image
                     </Form.Label>
                   </div>
-                </>
-              ) : (
-                <Form.Label
-                  className="image-container"
-                  htmlFor="image-upload"
-                >
-                  <Asset
-                    src={Upload}
-                    message="Click or tap to upload an image"
-                  />
-                </Form.Label>
-              )}
-  
               <Form.File
               className="upload"
                 id="image-upload"
@@ -182,4 +181,4 @@ function PostCreateForm() {
   );
 }
 
-export default PostCreateForm;
+export default PostEditForm;
