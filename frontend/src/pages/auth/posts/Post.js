@@ -129,6 +129,8 @@ const Post = (props) => {
       } 
     };
 
+    const ingredientsArray = ingredients.split(',').map(ingredient => ingredient.trim());
+
   return (
     <Card className="Post">
     <Card.Body>
@@ -151,7 +153,20 @@ const Post = (props) => {
     </Link>
     <Card.Body>
       {title && <Card.Title className="Text-center">{title}</Card.Title>}
-      {ingredients && <Card.Text className='Text-left'>{ingredients}</Card.Text>}
+      {ingredientsArray.length > 0 && (
+      <Card.Text className="Text-center">
+          <br></br>
+          <h4 className='ingredientsTitle'>Ingredients:</h4>
+
+          <ul className="IList">
+            {ingredientsArray.map((ingredient, index) => (
+              <li className="Text-left" key={index}> {ingredient}</li>
+            ))}
+          </ul>
+          <br></br>
+
+      </Card.Text>
+)}
       {content && <Card.Text className='Text-left'>{content}</Card.Text>}
       <div className="PostBar">
         {is_owner ? (

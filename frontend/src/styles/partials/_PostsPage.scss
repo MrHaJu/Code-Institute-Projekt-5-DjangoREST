@@ -74,3 +74,18 @@
 .PostUser:hover {
   font-weight: bold;
 }
+
+.IList {
+  display: flex;
+  flex-direction: column;
+  padding-left: 50%;
+  gap: .3em;
+  align-items:flex-start;
+  li {
+    text-align: left;
+    }
+}
+
+.ingredientsTitle {
+  margin-bottom: 1em;
+}
