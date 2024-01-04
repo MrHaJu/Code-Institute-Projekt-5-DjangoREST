@@ -167,7 +167,10 @@ const Post = (props) => {
 
       </Card.Text>
 )}
-      {content && <Card.Text className='Text-left'>{content}</Card.Text>}
+      {content && <Card.Text className='Text-left'>
+        <h4 className='ingredientsTitle'>Recipe:</h4>
+        {content}
+        </Card.Text>}
       <div className="PostBar">
         {is_owner ? (
           <OverlayTrigger
