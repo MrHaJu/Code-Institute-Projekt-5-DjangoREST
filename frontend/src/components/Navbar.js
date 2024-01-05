@@ -36,20 +36,20 @@ export default function Navbar() {
       name: "Home",
       path: "/",
       icon: faHome,
-      key: "0",
+      id: 0,
     },
     {
       name: "Recipes",
       path: "/recipes",
       icon: faList,
-      key: "8",
+      id: 8,
     },
 
     {
       name: "Settings",
       path: "/settings",
       icon: faCog,
-      key: "9",
+      id: 9,
     },
   ];
 
@@ -62,13 +62,13 @@ export default function Navbar() {
       name: "Login",
       path: "/login",
       icon: faUser,
-      key: "1",
+      id: 1,
     },
     {
       name: "Sign up",
       path: "/register",
       icon: faSignIn,
-      key: "2",
+      id: 2,
     },
   ];
   // Displays Icons only for logged in Users
@@ -78,31 +78,31 @@ export default function Navbar() {
       name: "Profile",
       path: "/Profile",
       icon: faUser,
-      key: "3",
+      id: 3,
     },
     {
       name: "Add Post",
       path: "/post/create",
       icon: faSquarePlus,
-      key: "4",
+      id: 4,
     },
     {
       name: "Liked",
       path: "/liked",
       icon: faHeart,
-      key: "5",
+      id: 5,
     },
     {
       name: "Bookmarked",
       path: "/bookmarked-posts",
       icon: faBook,
-      key: "6",
+      id: 6,
     },
     {
       name: "Logout",
       onClick: logout,
       icon: faSignOut,
-      key: "7",
+      id: 7,
     },
   ];
 
@@ -133,7 +133,7 @@ export default function Navbar() {
             <Link
               className={location.pathname === link.path ? "active" : ""}
               to={link.path}
-              key={link.key}
+              key={link.id}
             >
               <FontAwesomeIcon icon={link.icon} /> {link.name}
             </Link>
@@ -144,7 +144,7 @@ export default function Navbar() {
                 <Link
                   className={location.pathname === link.path ? "active" : ""}
                   to={link.path}
-                  key={link.key}
+                  key={link.id}
                   onClick={link.onClick}
                 >
                   <FontAwesomeIcon icon={link.icon} /> {link.name}
@@ -155,7 +155,7 @@ export default function Navbar() {
                 <Link
                   className={location.pathname === link.path ? "active" : ""}
                   to={link.path}
-                  key={link.key}
+                  key={link.id}
                 >
                   <FontAwesomeIcon icon={link.icon} /> {link.name}
                 </Link>
