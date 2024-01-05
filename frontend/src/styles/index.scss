@@ -267,3 +267,12 @@ img {
     }
     
 }
+
+@media screen and (max-width: 650px) {
+    .control {
+        width: 100%;
+    }
+    .comment {
+        margin-bottom: 1.5em;
+    }
+}
