@@ -8,7 +8,7 @@ export default function Sidebar({links, loggedOutIcons, loggedInIcons, close}){
     return (
         <div className="Sidebar" onClick={close}>
             {links.map(link => (
-                <Link to={link.path} className={location.pathname === link.path ? "sidebar-link active" : "sidebar-link"}  key={link.name}>
+                <Link to={link.path} className={location.pathname === link.path ? "sidebar-link active" : "sidebar-link"}  key={link.key}>
                     <FontAwesomeIcon icon={link.icon} />
                     {link.name}
                 </Link>
@@ -19,7 +19,7 @@ export default function Sidebar({links, loggedOutIcons, loggedInIcons, close}){
                 <Link
                 className={location.pathname === link.path ? "sidebar-link active" : "sidebar-link"}
                 to={link.path}
-                key={link.name}
+                key={link.key}
                 >
                     <FontAwesomeIcon icon={link.icon} /> {link.name}
                 </Link>
