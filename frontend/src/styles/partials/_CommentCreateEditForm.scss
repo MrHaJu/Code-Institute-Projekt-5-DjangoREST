@@ -1,0 +1,19 @@
+.Comment {
+    padding-top: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.control {
+    min-height: 6em;
+    min-width: 50%;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+.Cinput {
+    
+}

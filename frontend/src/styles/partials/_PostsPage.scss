@@ -57,10 +57,13 @@
 
 .Text-left {
   text-align: left;
+  color: var(--text-color);
+  padding: .5em;
 }
 
 .Text-center {
   text-align: center;
+  color: var(--text-color);
 }
 
 .PostUser {

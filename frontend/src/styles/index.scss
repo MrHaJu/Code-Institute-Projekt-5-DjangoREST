@@ -28,6 +28,9 @@ body {
     min-height: 100vh;
 }
 
+p {
+    color: var(--text-color);
+}
 
 
 
@@ -144,6 +147,7 @@ img {
 @import "partials/PostsPage";
 @import "partials/Avatar";
 @import "partials/moreDropdown";
+@import "partials/CommentCreateEditForm";
 
 
 
