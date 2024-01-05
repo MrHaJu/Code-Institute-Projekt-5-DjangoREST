@@ -50,6 +50,8 @@ const Post = (props) => {
   //console.log("Is Currentuser Post owner",is_owner)
   //console.log("PostPage",postPage)
   //console.log("Post id", post_id)
+  //console.log("Ingredients", ingredients)// here it works!
+
 
 
   const handleEdit = () => {
@@ -128,7 +130,7 @@ const Post = (props) => {
       } 
     };
 
-    const ingredientsArray = ingredients.split(',').map(ingredient => ingredient.trim());
+    const ingredientsArray = ingredients?.split(',').map(ingredient => ingredient.trim()) || [];
 
   return (
     <Card className="Post">

@@ -24,20 +24,25 @@ function PostPage() {
     const profile_image = currentUser?.profile_image;
     const [comments, setComments] = useState({ results: [] });
 
-    console.log("ID",id);
-    console.log("Post", post);
-    console.log("Current User",currentUser);
-    console.log("Ingredients:", post.ingredients);
-    console.log("_________");
+    //console.log("ID",id);
+    //console.log("Post", post);
+    //console.log("Current User",currentUser);
+    //console.log("Ingredients:", post.results[0]?.ingredients);// Here its undefined
+    //console.log("Post Item:", post.results[0]);
+    //console.log("_________");
 
     useEffect(() => {
+        //console.log('useEffect running');
         const handleMount = async () => {
             try {
                 const [{data: post}] = await Promise.all([
                     axiosReq.get(`/posts/${id}`)
-                ])
+                ]);
+                //console.log('*********')
+                //console.log({results: [post]})
+                //console.log({data: [post]})
                 setPost({results: [post]})
-                console.log(post)
+                //console.log(post)
             } catch(err) {
                 console.log(err)
             }
@@ -49,7 +54,7 @@ function PostPage() {
         <Row className="">
             <Col className="" lg={8}>
                 <p>Popular profiles for mobile</p>
-                <Post {...post.results[0]} setPosts={setPost} postPage />
+                <Post {...post.results[0]} setPosts={setPost} postPage /> 
             <Container className="">
             {currentUser ? (
                 <CommentCreateForm
