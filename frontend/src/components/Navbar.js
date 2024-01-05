@@ -125,7 +125,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="navbar container">
-        <Link to="/" key="0" className="logo">
+        <Link to="/" key="logo" className="logo">
           Mr.HaJu's <span>Recipes</span> sharing
         </Link>
         <div className="nav-links">
