@@ -53,7 +53,7 @@ function PostPage() {
     return (
         <Row className="">
             <Col className="" lg={8}>
-                <p>Popular profiles for mobile</p>
+                <p className="Text-left">Popular profiles for mobile</p>
                 <Post {...post.results[0]} setPosts={setPost} postPage /> 
             <Container className="">
             {currentUser ? (
@@ -69,7 +69,7 @@ function PostPage() {
             ) : null}
             </Container>
             </Col>
-            <Col lg={4} className="">
+            <Col lg={4} className="Text-left">
                 Popular profiles for desktop
             </Col>
         </Row>
