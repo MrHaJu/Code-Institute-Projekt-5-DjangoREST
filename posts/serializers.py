@@ -46,6 +46,7 @@ class PostSerializer(serializers.ModelSerializer):
             return like.id if like else None
         return None
 
+
     class Meta:
         model = Post
         fields = [
@@ -98,7 +99,8 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
     def get_bookmarked(self, obj):
         user = self.context['request'].user
-        return obj.bookmark_set.filter(user=user).exists()
+        return obj.bookmark_set.filter(#user=user
+                                       ).exists() # if user=user not commented out, cannot acces postdetails
 
     def validate(self, data):
         bookmark_checkbox = data.get('bookmark_checkbox', False)

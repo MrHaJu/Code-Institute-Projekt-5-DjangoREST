@@ -153,18 +153,16 @@ const Post = (props) => {
     <Card.Body>
       {title && <Card.Title className="Text-center">{title}</Card.Title>}
       {ingredientsArray.length > 0 && (
-      <Card.Text className="Text-center">
-          <br></br>
-          <h4 className='ingredientsTitle'>Ingredients:</h4>
-
-          <ul className="IList">
-            {ingredientsArray.map((ingredient, index) => (
-              <li className="Text-left" key={index}> {ingredient}</li>
-            ))}
-          </ul>
-          <br></br>
-
-      </Card.Text>
+  <Card.Text className="Text-center">
+    <br></br>
+    <h4 className='ingredientsTitle'>Ingredients:</h4>
+    <ul className="IList">
+      {ingredientsArray.map((ingredient, index) => (
+        <li className="Text-left" key={index}> {ingredient}</li>
+      ))}
+    </ul>
+    <br></br>
+  </Card.Text>
 )}
       {content && <Card.Text className='Text-left'>
         <h4 className='ingredientsTitle'>Recipe:</h4>
