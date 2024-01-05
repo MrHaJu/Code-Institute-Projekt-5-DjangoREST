@@ -67,7 +67,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
     ingredients = serializers.CharField(allow_blank=True)
     bookmarked = serializers.SerializerMethodField()
     bookmark_checkbox = serializers.BooleanField(write_only=True, required=False)
-
+    bookmarks_count = serializers.SerializerMethodField()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 *2:
@@ -96,6 +96,10 @@ class PostDetailSerializer(serializers.ModelSerializer):
             ).first()
             return like.id if like else None
         return None
+
+
+    def get_bookmarks_count(self, obj):
+        return obj.bookmark_set.count()
 
     def get_bookmarked(self, obj):
         user = self.context['request'].user
@@ -141,6 +145,6 @@ class PostDetailSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'title', 'content', 'image', 'image_filter',
-            'like_id', 'likes_count', 'comments_count', 'ingredients', 'bookmarked', 'bookmark_checkbox',
+            'like_id', 'likes_count', 'comments_count', 'ingredients', 'bookmarked', 'bookmark_checkbox',  'bookmarks_count',
         ]
     
