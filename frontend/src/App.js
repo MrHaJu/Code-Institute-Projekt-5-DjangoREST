@@ -14,7 +14,7 @@ import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import PostPage from "./pages/auth/posts/PostPage"
 import PostEditForm from "./pages/auth/posts/PostEditForm";
-
+import Profile from "../src/pages/auth/Profile"
 
 export const currentUserContext = createContext()
 export const setCurrentUserContext = createContext()
@@ -57,6 +57,7 @@ function App() {
           <Route exact path="/settings" element={<Settings />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/Profile" element={<Profile />} />
           <Route exact path="/post/create" element={<PostCreateForm />} />
            {/* Fallback for unknown Routes */}
           <Route path="*" element={<NotFound />} />
