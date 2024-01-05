@@ -1,0 +1,39 @@
+.Owner {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-right: 8px;
+}
+
+.Date {
+    font-weight: lighter;
+    color: #c1c1c5;
+}
+
+.CommentSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 1.5em;
+    border: 1px solid var(--primary-color);
+    border-radius: 50px;
+    box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+}
+
+.comment {
+    border-bottom: 1px solid var(--primary-color);
+    padding-bottom: 1em;
+    margin-bottom: .5em;
+    width: 500px;
+    color: var(--text-color);
+}
+
+.nocomment {
+    color: var(--text-color);
+    text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
+    margin-bottom: 1em;
+}
+
+.CommentDisplay {
+    display: flex;
+    flex-direction: row;
+}

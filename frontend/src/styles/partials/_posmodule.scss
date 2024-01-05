@@ -1,8 +1,10 @@
 .Post {
   background-color: var(--background-light);
-    border: 1px solid #dadadf;
-    border-radius: 2px;
+    border: 1px solid var(--primary-color);
+    border-radius: 50px;
+    box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
     text-align: center;
+    margin: 1.5em;
   }
   
   .Post figure,

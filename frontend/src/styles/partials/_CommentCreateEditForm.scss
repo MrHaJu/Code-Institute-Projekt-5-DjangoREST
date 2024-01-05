@@ -8,10 +8,19 @@
 }
 
 .control {
-    min-height: 6em;
+    min-height: 1em;
+    width: 300px;
     min-width: 50%;
     color: var(--text-color);
     background-color: var(--background-color);
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid var(--primary-color); 
+    outline: none;
+    transition: border-bottom-color 0.3s;
+    &:focus {
+        animation: glowing 1.5s infinite;
+        }
 }
 
 .Cinput {

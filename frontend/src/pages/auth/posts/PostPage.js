@@ -9,6 +9,8 @@ import { axiosReq } from "../../../api/axiosDefaults";
 import Post from "./Post";
 
 import CommentCreateForm from "../../comments/CommentsCreateForm";
+import Comment from "../../comments/Comment";
+
 //import { useCurrentUser } from "../../../contexts/CurrentUserContext";
 
 import { //setCurrentUserContext, 
@@ -19,11 +21,12 @@ function PostPage() {
     const { id } = useParams();
     const [post, setPost] = useState({ results: [] });
 
-    //const setCurrentUser = useContext(setCurrentUserContext);
+    
     const currentUser = useContext(currentUserContext);
     const profile_image = currentUser?.profile_image;
     const [comments, setComments] = useState({ results: [] });
 
+    //Debug section
     //console.log("ID",id);
     //console.log("Post", post);
     //console.log("Current User",currentUser);
@@ -32,17 +35,15 @@ function PostPage() {
     //console.log("_________");
 
     useEffect(() => {
-        //console.log('useEffect running');
         const handleMount = async () => {
             try {
-                const [{data: post}] = await Promise.all([
-                    axiosReq.get(`/posts/${id}`)
+                const [{data: post}, {data: comments}] = await Promise.all([
+                    axiosReq.get(`/posts/${id}`),
+                    axiosReq.get(`/comments/?post=${id}`),
                 ]);
-                //console.log('*********')
-                //console.log({results: [post]})
-                //console.log({data: [post]})
-                setPost({results: [post]})
-                //console.log(post)
+
+                setPost({results: [post]});
+                setComments(comments)
             } catch(err) {
                 console.log(err)
             }
@@ -53,9 +54,9 @@ function PostPage() {
     return (
         <Row className="">
             <Col className="" lg={8}>
-                <p className="Text-left">Popular profiles for mobile</p>
+                
                 <Post {...post.results[0]} setPosts={setPost} postPage /> 
-            <Container className="">
+            <Container className="CommentSection">
             {currentUser ? (
                 <CommentCreateForm
                 profile_id={currentUser.profile_id}
@@ -65,12 +66,23 @@ function PostPage() {
                 setComments={setComments}
             />
             ) : comments.results.length ? (
-                "Comments"
+                "Comments:"
             ) : null}
+            {comments.results.length ? (
+                comments.results.map(comment => (
+                    <Comment 
+                    key={comment.id} 
+                    {...comment} 
+                    setPost={setPost}
+                    setComments={setComments}
+                    />
+                ))
+            ) : currentUser ? (
+                <span className="nocomment">No comments yet, be the first to comment</span>
+            ) : (
+                <span className="nocomment">No comments... yet</span>
+            )}
             </Container>
-            </Col>
-            <Col lg={4} className="Text-left">
-                Popular profiles for desktop
             </Col>
         </Row>
 );

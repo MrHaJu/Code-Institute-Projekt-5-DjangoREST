@@ -28,9 +28,9 @@ body {
     min-height: 100vh;
 }
 
-p {
+/*p {
     color: var(--text-color);
-}
+}*/
 
 
 
@@ -148,7 +148,7 @@ img {
 @import "partials/Avatar";
 @import "partials/moreDropdown";
 @import "partials/CommentCreateEditForm";
-
+@import "partials/comments";
 
 
 .options-container {
