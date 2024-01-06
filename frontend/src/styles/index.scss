@@ -123,7 +123,11 @@ img {
     text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px var(--btnoff-color), 0 0 30px var(--btnoff-color), 0 0 40px var(--btnoff-color), 0 0 55px var(--btnoff-color), 0 0 75px var(--btnoff-color);
     }
 }
-
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 
 
 .minibtns{

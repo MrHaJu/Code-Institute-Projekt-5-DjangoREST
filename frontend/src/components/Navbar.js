@@ -3,6 +3,7 @@ import React
 //, { useContext } 
 from "react";
 import { useState } from "react";
+import Avatar from "./Avatar";
 import Sidebar from "./sidebar";
 import {
   faHome,
@@ -24,6 +25,7 @@ import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../contexts/CurrentUserContext";
+import { Row } from "react-bootstrap";
 //import Avatar from "./Avatar";
 export default function Navbar() {
   const currentUser = useCurrentUser();
@@ -80,12 +82,7 @@ export default function Navbar() {
   // Displays Icons only for logged in Users
   const loggedInIcons = [
     { currentUser },
-    {
-      name: "Profile",
-      path: "/profiles",
-      icon: faUser,
-      id: 3,
-    },
+    
     {
       name: "Add Post",
       path: "/post/create",
@@ -134,6 +131,19 @@ export default function Navbar() {
         <Link to="/" key="logo" className="logo">
           Mr.HaJu's <span>Recipes</span> sharing
         </Link>
+        {currentUser && (
+        <Link
+          className="nav-links Text-center row"
+          to={`/profiles/${currentUser.profile_id}`}
+        >
+          <Row>
+            <Avatar className="" src={currentUser.profile_image} height={40} />
+          </Row>
+          <Row>
+            <p>Profile</p>
+          </Row>
+        </Link>
+        )}
         <div className="nav-links">
           {links.map((link) => (
             <Link
