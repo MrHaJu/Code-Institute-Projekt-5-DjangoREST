@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useRedirect } from "../../hooks/useRedirect";
 
 
   const Register = () => {
+    useRedirect('loggedIn')
     const [signUpData, setSignUpData] = useState ({
       username: '',
       email: '',

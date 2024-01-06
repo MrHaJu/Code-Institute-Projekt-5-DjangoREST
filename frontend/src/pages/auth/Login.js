@@ -7,12 +7,14 @@ import {
   //useCurrentUser,
   useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
+import { useRedirect } from '../../hooks/useRedirect';
 
 const Login = () => {
   const navigate = useNavigate();
   //const setCurrentUser = useContext(setCurrentUserContext)
   //const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  useRedirect('loggedIn')
   const [signInData, setSignInData] = useState({
     username: '',
     password: '',
@@ -34,7 +36,7 @@ const Login = () => {
       setCurrentUser(data.user);
       console.log('Login erfolgreich')
       // Redirect to the homepage after login
-      navigate('/');
+      navigate(-1);
     } catch (err) {
       setErrors(err.response?.data);
       // Set a timeout to clear errors after 5 seconds

@@ -12,8 +12,10 @@ import { Image } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Alert from "react-bootstrap/Alert";
+import {useRedirect} from "../../../hooks/useRedirect";
 
 function PostCreateForm() {
+  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({
