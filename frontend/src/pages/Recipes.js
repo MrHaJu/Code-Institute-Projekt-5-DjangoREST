@@ -16,6 +16,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../utils/utils";
+import PopularProfiles from "./profiles/PopularProfiles";
 
 function Recipes({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
@@ -48,15 +49,19 @@ function Recipes({ message, filter = "" }) {
     return (
         <main>
             <PreviousSearches onSubmit={(event) => event.preventDefault()} onChange={(event) => setQuery(event.target.value)}/>
-            <div className="recipes-container">
-              <Row className="h-100">
-                <Col className="py-2 p-0 p-lg-2" lg={8}>
-                  <div className="search-box">
+            <div className="search-box">
                   <Form htmlFor="search" onSubmit={(event) => event.preventDefault()}>
                     <Form.Control value={query} onChange={(event) => setQuery(event.target.value)} id="	search"  type="text" placeholder="Search..."/>
                   </Form>
                   <button htmlFor="search" className='btn'><FontAwesomeIcon icon={faSearch} /></button>
                   </div>
+            <div className="recipes-container">
+              <Row className="h-100">
+                <Col md={4} className="Content">
+                    <PopularProfiles />
+                </Col>
+                <Col className="py-2 p-0 p-lg-2" lg={8}>
+                  
                   {hasLoaded ? (
                     <>
                       {posts.results.length ? (
@@ -82,9 +87,7 @@ function Recipes({ message, filter = "" }) {
                     </Container>
                   )}
                 </Col>
-                <Col md={4} className="Content">
-
-                </Col>
+                
               </Row>
             </div>
         </main>

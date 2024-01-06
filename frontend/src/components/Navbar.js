@@ -76,7 +76,7 @@ export default function Navbar() {
     { currentUser },
     {
       name: "Profile",
-      path: "/Profile",
+      path: "/profiles",
       icon: faUser,
       id: 3,
     },

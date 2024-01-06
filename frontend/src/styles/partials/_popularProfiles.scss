@@ -1,0 +1,28 @@
+.MfProf {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    margin: 2em;
+    text-align: left;
+    color: var(--text-color);
+    font-weight: bold;
+}
+.prof {
+    max-width: 250px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--primary-color);
+}
+.ProfTitle {
+    padding-top: 1.5em;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+}
+
+.WordBreak {
+    word-break: break-all;
+}
+
+.Text-right {
+    text-align: right;
+}

@@ -68,7 +68,7 @@ function PostPage() {
                 setComments={setComments}
             />
             ) : comments.results.length ? (
-                "Comments:"
+                <p className="Text-center">Comments:</p>
             ) : null}
             {comments.results.length ? (
             <InfiniteScroll
@@ -85,7 +85,7 @@ function PostPage() {
                 hasMore={!!comments.next}
                 next={() => fetchMoreData(comments, setComments)}
             />
-          ) : currentUser ? (
+            ) : currentUser ? (
                 <span className="nocomment">No comments yet, be the first to comment</span>
             ) : (
                 <span className="nocomment">No comments... yet</span>

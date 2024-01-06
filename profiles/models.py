@@ -11,7 +11,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=255, blank=True, null=True)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='../https://res.cloudinary.com/db6t1xmmn/image/upload/v1702027584/PP5/t6rrcjmjznyvnodygcdn.jpg'
+        upload_to='images/', default='../https://res.cloudinary.com/db6t1xmmn/image/upload/v1703686969/media/images/default_profile_mc0hy3.jpg'
     )
     
     class Meta:
