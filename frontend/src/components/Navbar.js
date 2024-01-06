@@ -1,5 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import React, { useContext } from "react";
+import React
+//, { useContext } 
+from "react";
 import { useState } from "react";
 import Sidebar from "./sidebar";
 import {
@@ -16,14 +18,18 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { setCurrentUserContext } from "../App";
-import { currentUserContext } from "../App";
-
+//import { setCurrentUserContext } from "../App";
+//import { currentUserContext } from "../App";
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../contexts/CurrentUserContext";
 //import Avatar from "./Avatar";
 export default function Navbar() {
-  
-  const setCurrentUser = useContext(setCurrentUserContext);
-  const currentUser = useContext(currentUserContext);
+  const currentUser = useCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
+  //const setCurrentUser = useContext(setCurrentUserContext);
+  //const currentUser = useContext(currentUserContext);
   
   const logout = () => handleSignOut();
   const [showSidebar, setShowSidebar] = useState(false);

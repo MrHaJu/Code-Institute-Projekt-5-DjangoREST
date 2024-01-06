@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Image } from "react-bootstrap";
+import { Button, 
+  Image } from "react-bootstrap";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -10,8 +11,9 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useParams } from "react-router-dom";
 import {useSetProfileData, useProfileData} from "../../contexts/ProfileDataContext"
-import { currentUserContext } from "../../App";
+//import { currentUserContext } from "../../App";
 function ProfilePage() {
+
     const [hasLoaded, setHasLoaded] = useState(false);
     const currentUser = useCurrentUser();
     const {id} = useParams();

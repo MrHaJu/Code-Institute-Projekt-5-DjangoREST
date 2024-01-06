@@ -9,38 +9,37 @@ export const useProfileData = () => useContext(ProfileDataContext);
 export const useSetProfileData = () => useContext(SetProfileDataContext);
 
 export const ProfileDataProvider = ({ children }) => {
-    const [profileData, setProfileData] = useState({
+  const [profileData, setProfileData] = useState({
     // we will use the pageProfile later!
     pageProfile: { results: [] },
     popularProfiles: { results: [] },
-    });
+  });
 
+  const currentUser = useCurrentUser();
 
-    const currentUser = useCurrentUser();
-
-    useEffect(() => {
+  useEffect(() => {
     const handleMount = async () => {
-        try {
-            const { data } = await axiosReq.get(
-            "/profiles/?ordering=-followers_count"
-            );
+      try {
+        const { data } = await axiosReq.get(
+          "/profiles/?ordering=-posts_count"
+        );
         setProfileData((prevState) => ({
-            ...prevState,
-            popularProfiles: data,
+          ...prevState,
+          popularProfiles: data,
         }));
-        } catch (err) {
-            console.log(err);
-        }
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     handleMount();
-    }, [currentUser]);
+  }, [currentUser]);
 
-    return (
-        <ProfileDataContext.Provider value={profileData}>
-        <SetProfileDataContext.Provider value={setProfileData}>
-            {children}
-        </SetProfileDataContext.Provider>
-        </ProfileDataContext.Provider>
-    );
+  return (
+    <ProfileDataContext.Provider value={profileData}>
+      <SetProfileDataContext.Provider value={setProfileData}>
+        {children}
+      </SetProfileDataContext.Provider>
+    </ProfileDataContext.Provider>
+  );
 };

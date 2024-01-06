@@ -1,5 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { currentUserContext } from "../../../App";
+import React, { //useContext, 
+  useState, useEffect } from 'react'
+//import { currentUserContext } from "../../../App";
+import {
+  useCurrentUser,
+  //useSetCurrentUser,
+} from "../../../contexts/CurrentUserContext";
+
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import Avatar from "../../../components/Avatar";
@@ -37,7 +43,9 @@ const Post = (props) => {
     setPosts,
   } = props;
   const [isBookmarked, setIsBookmarked] = useState(null);
-  const currentUser = useContext(currentUserContext);
+  //const currentUser = useContext(currentUserContext);
+  const currentUser = useCurrentUser();
+
   const post_id = id
   const is_owner = currentUser && currentUser.username === owner;
   const navigate = useNavigate();
@@ -60,8 +68,8 @@ const Post = (props) => {
 
   const handleDelete = async () => {
     try {
-      await axiosRes.delete(`/recipes/${id}/`);
-      navigate(-1);
+      await axiosRes.delete(`/posts/${id}/`);
+      navigate("/recipes");
     } catch (err) {
       console.log(err);
     }

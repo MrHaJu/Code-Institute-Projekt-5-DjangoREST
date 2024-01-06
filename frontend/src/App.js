@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, 
+  Routes, Route } from "react-router-dom";
 
 import React from "react";
 import Navbar from "./components/Navbar";
@@ -10,41 +11,42 @@ import Login from "./pages/auth/Login";
 import Footer from "./components/Footer";
 import PostCreateForm from "./pages/auth/posts/PostCreateForm"
 import './api/axiosDefaults'
-import { createContext, useEffect, useState } from "react";
-import axios from "axios";
+//import { createContext, useEffect, useState } from "react";
+//import axios from "axios";
 import PostPage from "./pages/auth/posts/PostPage"
 import PostEditForm from "./pages/auth/posts/PostEditForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
-
-export const currentUserContext = createContext()
-export const setCurrentUserContext = createContext()
+import { useCurrentUser } from "./contexts/CurrentUserContext";
+//export const currentUserContext = createContext()
+//export const setCurrentUserContext = createContext()
 
 
 function App() {
-  const [ currentUser, setCurrentUser] = useState(
-    null
-  )
-  
+ // const [ currentUser, setCurrentUser] = useState(
+ //   null
+ // )
+  const currentUser = useCurrentUser();
+ 
   
   const profile_id = currentUser?.profile_id || "";
 
-  const handleMount = async () => {
-    try {
-      const { data } = await axios.get("/dj-rest-auth/user/")
-      if (data) setCurrentUser(data)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  useEffect(() => {
-    handleMount();
-  }, []);
+  //const handleMount = async () => {
+  //  try {
+  //    const { data } = await axios.get("/dj-rest-auth/user/")
+  //    if (data) setCurrentUser(data)
+  //  } catch (err) {
+  //    console.log(err)
+  //  }
+  //}
+//
+  //useEffect(() => {
+  //  handleMount();
+  //}, []);
 
   return (
-    <currentUserContext.Provider value={currentUser}>
-      <setCurrentUserContext.Provider value={setCurrentUser}>
-    <Router>
+    //<currentUserContext.Provider value={currentUser}>
+    //  <setCurrentUserContext.Provider value={setCurrentUser}>
+    <>
       <Navbar />
       <div className="container main">
         <Routes>
@@ -64,9 +66,9 @@ function App() {
         </Routes>
       </div>
       <Footer />
-    </Router>
-    </setCurrentUserContext.Provider>
-    </currentUserContext.Provider>
+    </>
+    //</setCurrentUserContext.Provider>
+    //</currentUserContext.Provider>
   );
 }
 

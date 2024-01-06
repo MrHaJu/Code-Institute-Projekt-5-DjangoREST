@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useContext} from "react";
+import React, { useEffect, useState, 
+    //useContext
+} from "react";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -13,18 +15,18 @@ import Comment from "../../comments/Comment";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Asset from "../../../components/Asset";
 import { fetchMoreData } from "../../../utils/utils";
-//import { useCurrentUser } from "../../../contexts/CurrentUserContext";
+import { useCurrentUser } from "../../../contexts/CurrentUserContext";
 
-import { //setCurrentUserContext, 
-    currentUserContext } from "../../../App";
+//import { //setCurrentUserContext, 
+ //   currentUserContext } from "../../../App";
 
 
 function PostPage() {
     const { id } = useParams();
     const [post, setPost] = useState({ results: [] });
 
-    
-    const currentUser = useContext(currentUserContext);
+    const currentUser = useCurrentUser();
+    //const currentUser = useContext(currentUserContext);
     const profile_image = currentUser?.profile_image;
     const [comments, setComments] = useState({ results: [] });
 

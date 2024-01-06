@@ -1,6 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { //useContext, 
+    useEffect, useState } from 'react'
 import { axiosReq } from '../../api/axiosDefaults';
-import { currentUserContext } from '../../App';
+//import { currentUserContext } from '../../App';
+import {
+    useCurrentUser,
+    //useSetCurrentUser,
+  } from "../../contexts/CurrentUserContext";
+
 import Asset from "../../components/Asset";
 import Profile from './Profile';
 const PopularProfiles = () => {
@@ -10,7 +16,8 @@ const PopularProfiles = () => {
         popularProfiles: { results: [] },
     });
     const { popularProfiles } = profileData;
-    const currentUser = useContext(currentUserContext);
+    //const currentUser = useContext(currentUserContext);
+    const currentUser = useCurrentUser();
     useEffect(() => {
         const handleMount = async () => {
             try {
