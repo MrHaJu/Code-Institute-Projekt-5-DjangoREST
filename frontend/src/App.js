@@ -17,6 +17,12 @@ import PostPage from "./pages/auth/posts/PostPage"
 import PostEditForm from "./pages/auth/posts/PostEditForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
+import UsernameForm from "./pages/profiles/UsernameForm";
+import UserPasswordForm from "./pages/profiles/UserPasswordForm";
+import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+
+
+
 //export const currentUserContext = createContext()
 //export const setCurrentUserContext = createContext()
 
@@ -61,6 +67,9 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/profiles/:id" element={<ProfilePage />} />
           <Route exact path="/post/create" element={<PostCreateForm />} />
+          <Route exact path="/profiles/:id/edit/username" element={<UsernameForm />}/>
+          <Route exact path="/profiles/:id/edit/password" element={<UserPasswordForm />}/>
+          <Route exact path="/profiles/:id/edit" element={<ProfileEditForm />}/>
            {/* Fallback for unknown Routes */}
           <Route path="*" element={<NotFound />} />
         </Routes>
