@@ -3,6 +3,7 @@
     --background-light: #fff;
     --shadow-color: rgba(0, 0, 0, 0.2);
     --primary-color: rgb(53, 148, 24);
+    --btnoff-color: rgb(116, 129, 255);
     --text-color: #0A0A0A;
     --text-light: #575757;
     --text-dark: #0A0A0A;
@@ -106,6 +107,24 @@ img {
     text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px var(--primary-color), 0 0 30px var(--primary-color), 0 0 40px var(--primary-color), 0 0 55px var(--primary-color), 0 0 75px var(--primary-color);
     }
 }
+.btnsmno {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: var(--btnoff-color);
+    color: #fff;
+    padding: .25em .5em;
+    text-transform: uppercase;
+    font-size: .8em;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    &:hover {
+    text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px var(--btnoff-color), 0 0 30px var(--btnoff-color), 0 0 40px var(--btnoff-color), 0 0 55px var(--btnoff-color), 0 0 75px var(--btnoff-color);
+    }
+}
+
+
 
 .minibtns{
     display: flex;
@@ -231,6 +250,18 @@ img {
 .container {
     padding-inline: 12vw;
 }
+
+.FlexRows {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    align-items: center;
+    margin: 2em;
+}
+
+
+
 
 
 

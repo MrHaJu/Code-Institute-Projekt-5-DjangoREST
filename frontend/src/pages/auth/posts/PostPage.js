@@ -16,7 +16,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Asset from "../../../components/Asset";
 import { fetchMoreData } from "../../../utils/utils";
 import { useCurrentUser } from "../../../contexts/CurrentUserContext";
-
+import PopularProfiles from "../../profiles/PopularProfiles";
 //import { //setCurrentUserContext, 
  //   currentUserContext } from "../../../App";
 
@@ -58,7 +58,7 @@ function PostPage() {
     return (
         <Row className="">
             <Col className="" lg={8}>
-                
+            <PopularProfiles />
                 <Post {...post.results[0]} setPosts={setPost} postPage /> 
             <Container className="CommentSection">
             {currentUser ? (
