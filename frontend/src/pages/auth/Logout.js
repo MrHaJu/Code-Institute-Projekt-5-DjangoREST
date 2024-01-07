@@ -14,11 +14,11 @@ const Logout = () => {
         try {
           await axios.post('/dj-rest-auth/logout/');
           setCurrentUser(null);
-          console.log("Ausloggen");
+          //console.log("Ausloggen");
           // Display the message for 10 seconds before redirecting
           await new Promise((resolve) => setTimeout(resolve, 10000));
         } catch (err) {
-          console.log(err);
+          //console.log(err);
         } finally {
           localStorage.removeItem('authToken');
           // Redirect to the homepage after logout

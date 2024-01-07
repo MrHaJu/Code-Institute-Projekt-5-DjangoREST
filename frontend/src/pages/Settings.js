@@ -26,7 +26,7 @@ export default function Settings() {
     }
     // saves settings to Local Storage
     localStorage.setItem("userSettings", JSON.stringify(settings));
-    console.log("settings saved:", settings);
+    //console.log("settings saved:", settings);
     }, [settings]);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export default function Settings() {
         const storedSettings = localStorage.getItem("userSettings");
         if (storedSettings) {
             setSettings(JSON.parse(storedSettings));
-            console.log("settings loaded:", JSON.parse(storedSettings));
+            //console.log("settings loaded:", JSON.parse(storedSettings));
         }
         }, []);
 
