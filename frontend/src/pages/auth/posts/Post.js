@@ -1,9 +1,9 @@
-import React, { //useContext, 
+import React, {  
   useState, useEffect } from 'react'
-//import { currentUserContext } from "../../../App";
+
 import {
   useCurrentUser,
-  //useSetCurrentUser,
+
 } from "../../../contexts/CurrentUserContext";
 
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -43,22 +43,13 @@ const Post = (props) => {
     setPosts,
   } = props;
   const [isBookmarked, setIsBookmarked] = useState(null);
-  //const currentUser = useContext(currentUserContext);
+
   const currentUser = useCurrentUser();
 
   const post_id = id
   const is_owner = currentUser && currentUser.username === owner;
   const navigate = useNavigate();
   const postPage = true
-
-  //Debug section
-  //console.log("________________")
-  //console.log("CurrentUser", currentUser && currentUser.username)
-  //console.log("Post Owner",owner)
-  //console.log("Is Currentuser Post owner",is_owner)
-  //console.log("PostPage",postPage)
-  //console.log("Post id", post_id)
-  //console.log("Ingredients", ingredients)// here it works!
 
 
 

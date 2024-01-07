@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import React
-//, { useContext } 
+
 from "react";
 import { useState } from "react";
 import Avatar from "./Avatar";
@@ -19,19 +19,17 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-//import { setCurrentUserContext } from "../App";
-//import { currentUserContext } from "../App";
+
 import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../contexts/CurrentUserContext";
 import { Row } from "react-bootstrap";
-//import Avatar from "./Avatar";
+
 export default function Navbar() {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-  //const setCurrentUser = useContext(setCurrentUserContext);
-  //const currentUser = useContext(currentUserContext);
+
   
   const logout = () => handleSignOut();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -110,11 +108,11 @@ export default function Navbar() {
   ];
 
   const handleSignOut = async () => {
-    //console.log("Vor dem Logout:", currentUser);
+
     try {
       await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
-      // console.log("Nach dem Logout:", currentUser);
+
       console.log("Ausloggen erfolgreich");
     } catch (err) {
       console.log(err, "<===err");

@@ -91,6 +91,7 @@ function PostCreateForm() {
           as="textarea"
           rows={10}
           name="ingredients"
+          placeholder="Ingredients separated by ','"
           value={ingredients}
           onChange={handleChange}
         />
@@ -101,9 +102,10 @@ function PostCreateForm() {
           </Alert>
       ))}
       <Form.Group className="Content flex-item">
-        <Form.Label>Content</Form.Label>
+        <Form.Label>Recipe</Form.Label>
         <Form.Control
           as="textarea"
+          placeholder="Recipe"
           rows={10}
           name="content"
           value={content}

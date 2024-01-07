@@ -14,7 +14,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useParams } from "react-router-dom";
 import {useSetProfileData, useProfileData} from "../../contexts/ProfileDataContext"
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
-//import { currentUserContext } from "../../App";
+
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profilePosts, setProfilePosts] = useState({ results: [] });
@@ -48,17 +48,6 @@ function ProfilePage() {
       };
       fetchData();
     }, [id, setProfileData]);
-
-
-//Debug zone:
-//console.log("_____________");
-//console.log(pageProfile);
-//console.log(currentUser);
-//console.log(id);
-//console.log(is_owner);
-//console.log(profile);
-//console.log();
-//console.log();
 
 
   const mainProfile = (
@@ -126,17 +115,19 @@ function ProfilePage() {
           next={() => fetchMoreData(profilePosts, setProfilePosts)}
         />
       ) : (
+        <div className="Text-center space">
         <Asset
           src={NoResults}
           message={`No results found, ${profile?.owner} hasn't posted yet.`}
         />
+        </div>
       )}
     </>
   );
 
   return (
-    <Row>
-      <Col lg={2} className="">
+    <Row className="Column">
+      <Col lg={2} className="Content popprof">
         <PopularProfiles />
       </Col>
       <Col className="" lg={8}>

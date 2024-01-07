@@ -56,8 +56,8 @@ function Recipes({ message, filter = "" }) {
                   <button htmlFor="search" className='btn'><FontAwesomeIcon icon={faSearch} /></button>
                   </div>
             <div className="recipes-container">
-              <Row className="h-100">
-                <Col md={4} className="Content">
+              <Row className="Column">
+                <Col md={4} className="Content popprof">
                     <PopularProfiles />
                 </Col>
                 <Col className="py-2 p-0 p-lg-2" lg={8}>

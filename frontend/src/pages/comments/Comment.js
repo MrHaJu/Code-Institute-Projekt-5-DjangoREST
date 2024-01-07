@@ -1,12 +1,12 @@
-import React, {//useContext, 
+import React, {
     useState } from 'react';
 import {Media} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import Avatar from '../../components/Avatar';
-//import { currentUserContext } from "../../App";
+
 import {
     useCurrentUser,
-    //useSetCurrentUser,
+
   } from "../../contexts/CurrentUserContext";
 
 import { MoreDropdown } from '../../components/MoreDropdown';
@@ -24,7 +24,7 @@ const Comment = (props) => {
     } = props
 
     const [showEditForm, setShowEditForm] = useState(false);
-    //const currentUser = useContext(currentUserContext);
+
     const currentUser = useCurrentUser();
     
     const is_owner = currentUser && currentUser.username === owner;

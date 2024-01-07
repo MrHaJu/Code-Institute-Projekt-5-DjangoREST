@@ -1,19 +1,19 @@
 import React
-//, { useContext } 
+
 from "react";
 import { Link, useLocation } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-//import { currentUserContext } from "../App";
+
 import {
     useCurrentUser,
-    //useSetCurrentUser,
+
   } from "../contexts/CurrentUserContext";
 
 export default function Sidebar({links, loggedOutIcons, loggedInIcons, close}){
     const location = useLocation()
-    //const currentUser = useContext(currentUserContext)
+
     const currentUser = useCurrentUser();
-    //const setCurrentUser = useSetCurrentUser();
+
     return (
         <div className="Sidebar" onClick={close}>
             {links.map(link => (

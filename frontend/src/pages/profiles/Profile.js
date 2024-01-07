@@ -1,6 +1,6 @@
-import React, { //useContext 
+import React, { 
 } from 'react'
-//import { currentUserContext } from '../../App';
+
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Link } from 'react-router-dom';
 import Avatar from '../../components/Avatar';

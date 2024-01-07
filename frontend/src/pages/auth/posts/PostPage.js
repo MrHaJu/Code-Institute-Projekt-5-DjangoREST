@@ -1,5 +1,5 @@
 import React, { useEffect, useState, 
-    //useContext
+
 } from "react";
 
 import Col from "react-bootstrap/Col";
@@ -17,8 +17,7 @@ import Asset from "../../../components/Asset";
 import { fetchMoreData } from "../../../utils/utils";
 import { useCurrentUser } from "../../../contexts/CurrentUserContext";
 import PopularProfiles from "../../profiles/PopularProfiles";
-//import { //setCurrentUserContext, 
- //   currentUserContext } from "../../../App";
+
 
 
 function PostPage() {
@@ -26,17 +25,11 @@ function PostPage() {
     const [post, setPost] = useState({ results: [] });
 
     const currentUser = useCurrentUser();
-    //const currentUser = useContext(currentUserContext);
+
     const profile_image = currentUser?.profile_image;
     const [comments, setComments] = useState({ results: [] });
 
-    //Debug section
-    //console.log("ID",id);
-    //console.log("Post", post);
-    //console.log("Current User",currentUser);
-    //console.log("Ingredients:", post.results[0]?.ingredients);// Here its undefined
-    //console.log("Post Item:", post.results[0]);
-    //console.log("_________");
+
 
     useEffect(() => {
         const handleMount = async () => {
