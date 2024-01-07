@@ -15,7 +15,7 @@ import { useRedirect } from "../../hooks/useRedirect";
     const { username, email, password1, password2 } = signUpData;
 
     const [errors, setErrors] = useState({});
-    const history = useNavigate();
+    const navigate = useNavigate();
     
     const  handleChange = (event) => {
       setSignUpData({
@@ -28,11 +28,13 @@ import { useRedirect } from "../../hooks/useRedirect";
       event.preventDefault();
       try {
         await axios.post('/dj-rest-auth/registration/', signUpData)
-        history('/login')
+        
         //console.log('Registrierung erfolgreich')
       } catch(err){
         //console.log(err)
         setErrors(err.response?.data);
+      } finally {
+        navigate('/login')
       }
     }
     const togglePassword = () => {
