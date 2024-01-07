@@ -44,6 +44,14 @@ body {
     object-fit: cover;
 }
 
+.PImage {
+    object-fit: cover;
+    height: 400px;
+    width: 100%;
+    margin: 2px;
+
+}
+
 .card-title {
     font-weight: bold;
     color: var(--text-color);

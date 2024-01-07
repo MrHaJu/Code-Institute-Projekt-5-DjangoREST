@@ -76,6 +76,9 @@ function ProfilePage() {
             </Col>
             
           </Row>
+          <Row>
+            {profile?.content && (<Col className="">{profile.content}</Col>)}
+          </Row>
         </Col>
         <Col lg={3} className="Text-right">
         {currentUser && 
@@ -99,7 +102,6 @@ function ProfilePage() {
         <Col lg={3} className="Dropmenu">
           {profile?.is_owner && <ProfileEditDropdown className="Text-left" id={profile?.id} />}
         </Col>
-        {profile?.content && (<Col className="">{profile.content}</Col>)}
       </Row>
     </>
   );

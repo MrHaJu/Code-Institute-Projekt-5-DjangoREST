@@ -116,12 +116,12 @@ const ProfileEditForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
-        <Col className="" md={7} lg={6}>
+        <Col className="Container" md={7} lg={6}>
           <Container className='Content'>
             <Form.Group>
               {image && (
                 <figure>
-                  <Image src={image} fluid />
+                  <Image src={image} fluid className="PImage"/>
                 </figure>
               )}
               {errors?.image?.map((message, idx) => (
