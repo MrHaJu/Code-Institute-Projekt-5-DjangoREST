@@ -131,7 +131,7 @@ export default function Navbar() {
         </Link>
         {currentUser && (
         <Link
-          className="nav-links Text-center row" key="profile"
+          className="nav-links Text-center row" key="profile" id="profile"
           to={`/profiles/${currentUser.profile_id}`}
         >
           <Row>
