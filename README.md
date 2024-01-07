@@ -38,7 +38,7 @@ This epic covers the front end interaction to like a post.
 
 **Comments**
 
-This epic covers the front end creation of comments underneath plants. This is to allow users to create comments and interact with other users.
+This epic covers the front end creation of comments underneath recipes. This is to allow users to create comments and interact with other users.
 
 **Profile**
 
@@ -64,7 +64,7 @@ By Epic:
 * As a User I can see the Navbar so I can reach all pages of the website
 * As a User I can scroll down to see all the Posts
 
-**Plants**
+**Recipes**
 
 * As a User I can post a Recipe so that I can share my recipes
 * As a User I can edit a Recipe so that I can update the information
