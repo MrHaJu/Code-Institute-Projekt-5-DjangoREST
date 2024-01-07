@@ -54,10 +54,11 @@ function ProfilePage() {
     <>
       
       <Row noGutters className="FlexRows">
-      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+        
         <Col lg={3} className="Text-left">
             <Image className="ProfileImage" roundedCircle src={profile?.image}/>
         </Col>
+        
         <Col lg={6}>
           <h3 className="Text-center">{profile?.owner}</h3>
           <Row className="FlexRows">
@@ -73,6 +74,7 @@ function ProfilePage() {
               <div>{ profile?.following_count}</div>
               <div>following</div>
             </Col>
+            
           </Row>
         </Col>
         <Col lg={3} className="Text-right">
@@ -94,6 +96,9 @@ function ProfilePage() {
             </button>
         ))}
         </Col>
+        <Col lg={3} className="Dropmenu">
+          {profile?.is_owner && <ProfileEditDropdown className="Text-left" id={profile?.id} />}
+        </Col>
         {profile?.content && (<Col className="">{profile.content}</Col>)}
       </Row>
     </>
@@ -101,9 +106,9 @@ function ProfilePage() {
 
   const mainProfilePosts = (
     <>
-      <hr />
+      <hr className="Hlines"/>
       <p className="text-center">{profile?.owner}'s posts</p>
-      <hr />
+      <hr className="Hlines" />
       {profilePosts.results.length ? (
         <InfiniteScroll
           children={profilePosts.results.map((post) => (

@@ -2,8 +2,8 @@
     object-fit: cover;
     height: 120px;
     width: 120px;
-    margin: 4px;
-    border-radius: 50px;
+    margin: 2px;
+    border-radius: 100%;
 }
 
 .space {
@@ -11,6 +11,15 @@
     flex-direction: column;
     justify-content: space-between;
     padding-top: 1em;
+}
+
+.Hlines {
+    border: .01em solid;
+    color: var(--primary-color);
+}
+
+.Dropmenu {
+    padding: 10px;
 }
 
 @media screen and (max-width: 991px) {

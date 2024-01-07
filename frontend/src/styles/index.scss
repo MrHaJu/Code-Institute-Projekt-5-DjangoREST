@@ -262,6 +262,7 @@ img {
     gap: 50px;
     align-items: center;
     margin: 2em;
+    
 }
 
 .Column {
@@ -319,14 +320,22 @@ img {
                 grid-column: span 2;
             }
         }
+        .FlexRows{
+            flex-direction: column;
+        }
 }
 
 
 @media screen and (max-width: 480px){
     .container {
-        padding-inline: 3vw;
+        padding-inline: 4vw;
     }
-    
+    .Dropmenu {
+        gap: 2em;
+    }
+    .DdText {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 650px) {
@@ -335,5 +344,10 @@ img {
     }
     .comment {
         margin-bottom: 1.5em;
+    }
+    .prof {
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: .5em;
     }
 }

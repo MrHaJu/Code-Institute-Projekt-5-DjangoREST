@@ -4,6 +4,8 @@ import {
     faEllipsisV,
     faEdit,
     faTrash,
+    faIdCard,
+    faKey,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
@@ -54,26 +56,30 @@ export function ProfileEditDropdown({ id }) {
     return (
       <Dropdown className="Absolute" drop="left">
         <Dropdown.Toggle as={ThreeDots} />
-        <Dropdown.Menu>
+        <Dropdown.Menu className="Dropmenu">
           <Dropdown.Item
             onClick={() => navigate(`/profiles/${id}/edit`)}
-            aria-label="edit-profile"
+            aria-label="edit-profile" 
+            className="DropdownItem"
           >
-            <i className="fas fa-edit" /> edit profile
+            <FontAwesomeIcon icon={faEdit} className="Icons" />
+            <p className="DdText">edit profile</p>
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => navigate(`/profiles/${id}/edit/username`)}
             aria-label="edit-username"
+            className="DropdownItem"
           >
-            <i className="far fa-id-card" />
-            change username
+            <FontAwesomeIcon icon={faIdCard} className="Icons"/>
+            <p className="DdText">change username</p>
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => navigate(`/profiles/${id}/edit/password`)}
             aria-label="edit-password"
+            className="DropdownItem"
           >
-            <i className="fas fa-key" />
-            change password
+            <FontAwesomeIcon icon={faKey} className="Icons"/>
+              <p className="DdText">change password</p>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

@@ -21,6 +21,12 @@
     }
 }
 
+.NavProftext {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color), 0 0 10px var(--primary-color);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
 
 
 .nav-links {

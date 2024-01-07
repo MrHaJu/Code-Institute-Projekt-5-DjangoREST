@@ -68,6 +68,7 @@ function Recipes({ message, filter = "" }) {
                 <Col md={4} className="Content popprof">
                     <PopularProfiles />
                 </Col>
+                
                 <Col className="py-2 p-0 p-lg-2" lg={8}>
                   
                   {hasLoaded ? (
