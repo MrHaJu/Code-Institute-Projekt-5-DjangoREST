@@ -115,7 +115,7 @@ export default function Navbar() {
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
-      console.log(err, "<===err");
+      //console.log(err, "<===err");
     } finally {
       // Redirect to the homepage after logout
       navigate("/");

@@ -29,9 +29,9 @@ import { useRedirect } from "../../hooks/useRedirect";
       try {
         await axios.post('/dj-rest-auth/registration/', signUpData)
         
-        console.log('Registrierung erfolgreich')
+        //console.log('Registrierung erfolgreich')
       } catch(err){
-        console.log(err)
+        //console.log(err)
         setErrors(err.response?.data);
       } finally {
         navigate('/login')

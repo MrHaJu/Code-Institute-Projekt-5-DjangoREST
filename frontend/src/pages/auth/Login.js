@@ -35,7 +35,7 @@ const Login = () => {
       const {data} = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
-      console.log('Login erfolgreich')
+      //console.log('Login erfolgreich')
       //Redirect to the homepage after login
       navigate("/");
     } catch (err) {
