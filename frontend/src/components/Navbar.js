@@ -158,7 +158,7 @@ export default function Navbar() {
                   className={location.pathname === link.path ? "active" : ""}
                   to={link.path}
                   key={link.id}
-                  onClick={link.onClick}
+                  onClick={(event) => { event.stopPropagation(); link.onClick(); }}
                 >
                   <FontAwesomeIcon icon={link.icon} /> {link.name}
                 </Link>
