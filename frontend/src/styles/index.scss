@@ -264,7 +264,11 @@ img {
     margin: 2em;
 }
 
-
+.Column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 
 

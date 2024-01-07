@@ -6,6 +6,13 @@
     border-radius: 50px;
 }
 
+.space {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+
 @media screen and (max-width: 991px) {
     .ProfileImage {
         width: 250px;
