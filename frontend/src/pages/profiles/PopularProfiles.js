@@ -1,39 +1,12 @@
-import React, { 
-    useEffect, useState } from 'react'
-import { axiosReq } from '../../api/axiosDefaults';
-
-import {
-    useCurrentUser,
-  } from "../../contexts/CurrentUserContext";
+import React from "react";
 
 import Asset from "../../components/Asset";
-import Profile from './Profile';
-const PopularProfiles = () => {
-    const [profileData, setProfileData] = useState({
-        pageProfile: { results: [] },
-        popularProfiles: { results: [] },
-    });
-    const { popularProfiles } = profileData;
+import { useProfileData } from "../../contexts/ProfileDataContext";
+import Profile from "./Profile";
 
-    const currentUser = useCurrentUser();
-    useEffect(() => {
-        const handleMount = async () => {
-            try {
-                const { data } = await axiosReq.get(
-                    "/profiles/?ordering=-posts_count"
-                );
-                setProfileData((prevState) => ({
-                    ...prevState,
-                    popularProfiles: data,
-                }));
-            } catch (err) {
-            console.log(err);
-            }
-        };
-    
-        handleMount();
-    }, [currentUser]);
-    
+const PopularProfiles = () => {
+  const { popularProfiles } = useProfileData();
+
     return (
         <div className='Post'>
             {popularProfiles.results.length ? (
