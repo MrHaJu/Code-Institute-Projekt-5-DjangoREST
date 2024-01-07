@@ -49,65 +49,63 @@ export default function Navbar() {
       name: "Recipes",
       path: "/recipes",
       icon: faList,
-      id: 8,
+      id: 1,
     },
-
     {
       name: "Settings",
       path: "/settings",
       icon: faCog,
-      id: 9,
+      id: 2,
     },
   ];
 
-  function closeSidebar() {
-    setShowSidebar(false);
-  }
+  
   // Displays Icons only for logged out Users
   const loggedOutIcons = [
     {
       name: "Login",
       path: "/login",
       icon: faUser,
-      id: 1,
+      id: 3,
     },
     {
       name: "Sign up",
       path: "/register",
       icon: faSignIn,
-      id: 2,
+      id: 4,
     },
   ];
   // Displays Icons only for logged in Users
   const loggedInIcons = [
-    { currentUser },
-    
     {
       name: "Add Recipe",
       path: "/post/create",
       icon: faSquarePlus,
-      id: 4,
+      id: 5,
     },
     {
       name: "Liked",
       path: "/liked",
       icon: faHeart,
-      id: 5,
+      id: 6,
     },
     {
       name: "Bookmarked",
       path: "/bookmarked-posts",
       icon: faBook,
-      id: 6,
+      id: 7,
     },
     {
       name: "Logout",
       onClick: logout,
       icon: faSignOut,
-      id: 7,
+      id: 8,
     },
   ];
 
+  function closeSidebar() {
+    setShowSidebar(false);
+  }
   const handleSignOut = async () => {
 
     try {
@@ -125,7 +123,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="navbar container">
-        <Link to="/" key="logo" className="logo">
+        <Link to="/" key="9" id="9" className="logo">
           Mr.HaJu's <span>Recipes</span> sharing
         </Link>
         {currentUser && (
