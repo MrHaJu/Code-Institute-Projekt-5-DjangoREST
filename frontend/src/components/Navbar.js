@@ -82,7 +82,7 @@ export default function Navbar() {
     { currentUser },
     
     {
-      name: "Add Post",
+      name: "Add Recipe",
       path: "/post/create",
       icon: faSquarePlus,
       id: 4,
@@ -131,14 +131,14 @@ export default function Navbar() {
         </Link>
         {currentUser && (
         <Link
-          className="nav-links Text-center row"
+          className="nav-links Text-center row" key="profile"
           to={`/profiles/${currentUser.profile_id}`}
         >
           <Row>
             <Avatar className="" src={currentUser.profile_image} height={40} />
           </Row>
           <Row>
-            <p>Profile</p>
+            <p className="NavProftext">Profile</p>
           </Row>
         </Link>
         )}
