@@ -49,7 +49,26 @@ const UserPasswordForm = () => {
       setErrors(err.response?.data);
     }
   };
-
+  const togglePassword = () => {
+    const passwordInput1 = document.getElementById("password1");
+    const passwordInput2 = document.getElementById("password2");
+  
+    if (passwordInput1 && passwordInput2) {
+      // Toggle visibility for password1
+      if (passwordInput1.type === "password") {
+        passwordInput1.type = "text";
+      } else {
+        passwordInput1.type = "password";
+      }
+  
+      // Toggle visibility for password2
+      if (passwordInput2.type === "password") {
+        passwordInput2.type = "text";
+      } else {
+        passwordInput2.type = "password";
+      }
+    }
+  };
   return (
     <Row>
       <Col className="py-2 mx-auto text-center" md={6}>
@@ -60,6 +79,7 @@ const UserPasswordForm = () => {
               <Form.Control
                 placeholder="new password"
                 type="password"
+                id="password1"
                 value={new_password1}
                 onChange={handleChange}
                 name="new_password1"
@@ -75,28 +95,38 @@ const UserPasswordForm = () => {
               <Form.Control
                 placeholder="confirm new password"
                 type="password"
+                id="password2"
                 value={new_password2}
                 onChange={handleChange}
                 name="new_password2"
               />
+              
             </Form.Group>
             {errors?.new_password2?.map((message, idx) => (
               <Alert key={idx} variant="warning">
                 {message}
               </Alert>
             ))}
-            <Button
-              className="btn"
-              onClick={() => navigate(-1)}
-            >
-              cancel
-            </Button>
-            <Button
-              type="submit"
-              className="btn"
-            >
-              save
-            </Button>
+            <div className="password-checkbox">
+          <label htmlFor="checkbox">Show Password </label>
+          <input id="checkbox" type="checkbox" onClick={togglePassword} />
+          </div>
+          {errors.confirmPassword?.map((message, idx) => (
+            <div className="alert alert-warning" key={idx}>
+              {message}
+              </div>))}
+            <div className="buttonspacer">
+              <Button
+                className="btnsm"
+                onClick={() => navigate(-1)}
+              >
+                cancel
+              </Button>
+              <Button className="btnsm" type="submit">
+                save
+              </Button>
+            </div>
+            
           </Form>
         </Container>
       </Col>

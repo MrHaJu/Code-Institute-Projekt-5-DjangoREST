@@ -99,15 +99,17 @@ const ProfileEditForm = () => {
           {message}
         </Alert>
       ))}
+      <div className="buttonspacer">
       <Button
-        className="btn"
+        className="btnsm"
         onClick={() => navigate(-1)}
       >
         cancel
       </Button>
-      <Button className="btn" type="submit">
+      <Button className="btnsm" type="submit">
         save
       </Button>
+      </div>
     </>
   );
 
@@ -127,7 +129,7 @@ const ProfileEditForm = () => {
                   {message}
                 </Alert>
               ))}
-              <div>
+              <div className="Text-center">
                 <Form.Label
                   className='btn'
                   htmlFor="image-upload"
@@ -135,7 +137,7 @@ const ProfileEditForm = () => {
                   Change the image
                 </Form.Label>
               </div>
-              <Form.File
+              <Form.File className="nono"
                 id="image-upload"
                 ref={imageFile}
                 accept="image/*"
@@ -149,7 +151,7 @@ const ProfileEditForm = () => {
                 }}
               />
             </Form.Group>
-            <div className="">{textFields}</div>
+            <div className="TextFields">{textFields}</div>
           </Container>
         </Col>
         

@@ -29,9 +29,12 @@ body {
     min-height: 100vh;
 }
 
-/*p {
-    color: var(--text-color);
-}*/
+.buttonspacer{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    margin-top: 1em;
+}
 
 
 
@@ -271,8 +274,14 @@ img {
     justify-content: center;
 }
 
-
-
+.nono {
+    display: none;
+    
+}
+.TextFields {
+    margin-top: 1em;
+    
+}
 
 @media screen and (max-width: 1552px){
     .container {

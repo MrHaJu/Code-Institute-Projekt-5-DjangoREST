@@ -69,18 +69,20 @@ const UsernameForm = () => {
                 {message}
               </Alert>
             ))}
+            <div className="buttonspacer">
             <Button
-              className="btn"
+              className="btnsm"
               onClick={() => navigate(-1)}
             >
               cancel
             </Button>
             <Button
-              className="btn"
+              className="btnsm"
               type="submit"
             >
               save
             </Button>
+            </div>
           </Form>
         </Container>
       </Col>
