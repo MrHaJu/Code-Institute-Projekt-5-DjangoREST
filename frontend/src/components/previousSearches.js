@@ -5,12 +5,18 @@ export default function PreviousSearches({ onChange }) {
         'pizza',
         'burger',
         'cookies',
+        'Kekse',
         'juice',
+        'saft',
+        'sushi',
         'salad',
         'ice cream',
+        'eis',
         'lasagna',
+        'cake',
         'pudding',
         'soup',
+        'suppe',
 
     ];
 
