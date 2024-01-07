@@ -1,5 +1,4 @@
-import { BrowserRouter as Router, 
-  Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import React from "react";
 import Navbar from "./components/Navbar";
@@ -11,8 +10,6 @@ import Login from "./pages/auth/Login";
 import Footer from "./components/Footer";
 import PostCreateForm from "./pages/auth/posts/PostCreateForm"
 import './api/axiosDefaults'
-//import { createContext, useEffect, useState } from "react";
-//import axios from "axios";
 import PostPage from "./pages/auth/posts/PostPage"
 import PostEditForm from "./pages/auth/posts/PostEditForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
@@ -20,38 +17,13 @@ import { useCurrentUser } from "./contexts/CurrentUserContext";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
-
-
-
-//export const currentUserContext = createContext()
-//export const setCurrentUserContext = createContext()
-
+import NotFound from "./components/NotFound";
 
 function App() {
- // const [ currentUser, setCurrentUser] = useState(
- //   null
- // )
   const currentUser = useCurrentUser();
- 
-  
   const profile_id = currentUser?.profile_id || "";
 
-  //const handleMount = async () => {
-  //  try {
-  //    const { data } = await axios.get("/dj-rest-auth/user/")
-  //    if (data) setCurrentUser(data)
-  //  } catch (err) {
-  //    console.log(err)
-  //  }
-  //}
-//
-  //useEffect(() => {
-  //  handleMount();
-  //}, []);
-
   return (
-    //<currentUserContext.Provider value={currentUser}>
-    //  <setCurrentUserContext.Provider value={setCurrentUser}>
     <>
       <Navbar />
       <div className="container main">
@@ -76,19 +48,17 @@ function App() {
       </div>
       <Footer />
     </>
-    //</setCurrentUserContext.Provider>
-    //</currentUserContext.Provider>
   );
 }
 
 // Fallback-component for unknown Routes
-function NotFound() {
-  return (
-    <div>
-      <h2>404 - Page not found</h2>
-      <p>The requested page does not exist.</p>
-    </div>
-  );
-}
+//function NotFound() {
+//  return (
+//    <div>
+//      <h2>404 - Page not found</h2>
+//      <p>The requested page does not exist.</p>
+//    </div>
+//  );
+//}
 
 export default App;

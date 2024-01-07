@@ -14,7 +14,7 @@ root.render(
                 <App />
             </ProfileDataProvider>
         </CurrentUserProvider>
-    </Router>
+    </Router>,
 );
 
 reportWebVitals();

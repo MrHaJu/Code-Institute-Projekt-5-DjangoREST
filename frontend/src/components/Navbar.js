@@ -25,6 +25,7 @@ import {
   useSetCurrentUser,
 } from "../contexts/CurrentUserContext";
 import { Row } from "react-bootstrap";
+import { removeTokenTimestamp } from "../utils/utils";
 
 export default function Navbar() {
   const currentUser = useCurrentUser();
@@ -112,12 +113,10 @@ export default function Navbar() {
     try {
       await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
-
-      console.log("Ausloggen erfolgreich");
+      removeTokenTimestamp();
     } catch (err) {
       console.log(err, "<===err");
     } finally {
-      localStorage.removeItem("authToken");
       // Redirect to the homepage after logout
       navigate("/");
     }
