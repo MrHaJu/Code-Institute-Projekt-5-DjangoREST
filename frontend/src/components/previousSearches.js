@@ -1,6 +1,6 @@
 
 
-export default function PreviousSearches() {
+export default function PreviousSearches({ onChange }) {
     const searches = [
         'pizza',
         'burger',
@@ -12,15 +12,25 @@ export default function PreviousSearches() {
         'pudding',
         'soup',
 
-    ]
+    ];
+
+    const handleClick = (search) => {
+        onChange(search);
+    };
     return (
         <div>
             <div className="previous-searches section">
                 <h2>Popular Searches</h2>
                 <div className="previous-searches-container">
-                    {searches.map((search, index) => (<div key={index} style={{animationDelay: index *.1 + "s" }} className="search-item">
-                        {search}
-                    </div>))}
+                    {searches.map((search, index) => (
+                        <button
+                            key={index}
+                            style={{ animationDelay: index * 0.1 + "s" }}
+                            className="search-item btnsm"
+                            onClick={() => handleClick(search)} // Hier wird der Klick-Handler hinzugefügt
+                        >
+                            {search}
+                        </button>))}
                 </div>
             </div>
         </div>

@@ -48,13 +48,21 @@ function Recipes({ message, filter = "" }) {
 
     return (
         <main>
-            <PreviousSearches onSubmit={(event) => event.preventDefault()} onChange={(event) => setQuery(event.target.value)}/>
+            <PreviousSearches onSubmit={(event) => event.preventDefault()} onChange={(value) => setQuery(value)}/>
             <div className="search-box">
-                  <Form htmlFor="search" onSubmit={(event) => event.preventDefault()}>
-                    <Form.Control value={query} onChange={(event) => setQuery(event.target.value)} id="	search"  type="text" placeholder="Search..."/>
-                  </Form>
-                  <button htmlFor="search" className='btn'><FontAwesomeIcon icon={faSearch} /></button>
-                  </div>
+                <Form htmlFor="search" onSubmit={(event) => event.preventDefault()}>
+                    <Form.Control
+                        value={query}
+                        onChange={(event) => setQuery(event.target.value)}
+                        id="search"
+                        type="text"
+                        placeholder="Search..."
+                    />
+                </Form>
+                <button htmlFor="search" className="btn">
+                    <FontAwesomeIcon icon={faSearch} />
+                </button>
+            </div>
             <div className="recipes-container">
               <Row className="Column">
                 <Col md={4} className="Content popprof">
