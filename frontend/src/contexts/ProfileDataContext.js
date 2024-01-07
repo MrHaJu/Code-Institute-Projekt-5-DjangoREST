@@ -11,7 +11,7 @@ export const useSetProfileData = () => useContext(SetProfileDataContext);
 
 export const ProfileDataProvider = ({ children }) => {
   const [profileData, setProfileData] = useState({
-
+    // we will use the pageProfile later!
     pageProfile: { results: [] },
     popularProfiles: { results: [] },
   });
@@ -20,28 +20,28 @@ export const ProfileDataProvider = ({ children }) => {
 
   const handleFollow = async (clickedProfile) => {
     try {
-      const {data} = await axiosRes.post('/followers/', {
-        followed: clickedProfile.id
+      const { data } = await axiosRes.post("/followers/", {
+        followed: clickedProfile.id,
       });
 
-      setProfileData(prevState => ({
+      setProfileData((prevState) => ({
         ...prevState,
         pageProfile: {
-          results: prevState.popularProfiles.results.map((profile) => 
-          followHelper(profile, clickedProfile, data.id)
+          results: prevState.pageProfile.results.map((profile) =>
+            followHelper(profile, clickedProfile, data.id)
           ),
         },
         popularProfiles: {
           ...prevState.popularProfiles,
-          results: prevState.popularProfiles.results.map((profile) => 
-          followHelper(profile, clickedProfile, data.id)
+          results: prevState.popularProfiles.results.map((profile) =>
+            followHelper(profile, clickedProfile, data.id)
           ),
         },
       }));
-    } catch(err) {
-      //console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   const handleUnfollow = async (clickedProfile) => {
     try {
@@ -62,7 +62,7 @@ export const ProfileDataProvider = ({ children }) => {
         },
       }));
     } catch (err) {
-      //console.log(err);
+      console.log(err);
     }
   };
 
@@ -77,7 +77,7 @@ export const ProfileDataProvider = ({ children }) => {
           popularProfiles: data,
         }));
       } catch (err) {
-        //console.log(err);
+        console.log(err);
       }
     };
 
@@ -86,7 +86,9 @@ export const ProfileDataProvider = ({ children }) => {
 
   return (
     <ProfileDataContext.Provider value={profileData}>
-      <SetProfileDataContext.Provider value={{ setProfileData, handleFollow, handleUnfollow }}>
+      <SetProfileDataContext.Provider
+        value={{ setProfileData, handleFollow, handleUnfollow }}
+      >
         {children}
       </SetProfileDataContext.Provider>
     </ProfileDataContext.Provider>

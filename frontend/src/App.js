@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 import React from "react";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -50,15 +49,5 @@ function App() {
     </>
   );
 }
-
-// Fallback-component for unknown Routes
-//function NotFound() {
-//  return (
-//    <div>
-//      <h2>404 - Page not found</h2>
-//      <p>The requested page does not exist.</p>
-//    </div>
-//  );
-//}
 
 export default App;
