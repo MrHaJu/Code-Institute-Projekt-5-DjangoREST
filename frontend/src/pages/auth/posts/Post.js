@@ -1,5 +1,4 @@
-import React, {  
-  useState, useEffect } from 'react'
+import React from 'react'
 
 import {
   useCurrentUser,
@@ -17,7 +16,7 @@ import {
   faBookBookmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from 'axios';
+
 import { MoreDropdown } from '../../../components/MoreDropdown';
 
 
@@ -27,11 +26,11 @@ const Post = (props) => {
   const {
     id,
     owner,
-
     profile_id,
     profile_image,
     comments_count,
-    bookmarks_count,
+    bookmark_count,
+    bookmark_id,
     likes_count,
     like_id,
     title,
@@ -39,14 +38,13 @@ const Post = (props) => {
     ingredients,
     image,
     updated_at,
-
     setPosts,
   } = props;
-  const [isBookmarked, setIsBookmarked] = useState(null);
+
 
   const currentUser = useCurrentUser();
 
-  const post_id = id
+  //const post_id = id
   const is_owner = currentUser && currentUser.username === owner;
   const navigate = useNavigate();
   const postPage = true
@@ -98,36 +96,39 @@ const Post = (props) => {
     }
   };
 
-    useEffect(() => {
-      if (currentUser) {
-      const fetchBookmarkStatus = async () => {
-        try {
-          
-            const response = await axios.get(`/posts/${post_id}/bookmark_status/`);
-            setIsBookmarked(response.data.bookmarked);
-          
-        } catch (error) {
-          console.error('Fehler beim Laden des Bookmark-Status', error);
-        }
-      };
-  
-      fetchBookmarkStatus();}
-    }, [post_id, currentUser]);
-  
-    const handleBookmark = async () => {
-      try {
-        if (isBookmarked) {
-          
-          await axios.delete(`/posts/${post_id}/unbookmark/`);
-        } else {
-          
-          await axios.post(`/posts/${post_id}/bookmark/`);
-        }
-        setIsBookmarked(!isBookmarked);
-      } catch (error) {
-        console.error('Fehler beim Aktualisieren des Bookmarks', error);
-      } 
-    };
+  const handleBookmark = async () => {
+    try {
+      const { data } = await axiosRes.post("/bookmark/", { post: id });
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? { ...post, bookmark_count: post.bookmark_count + 1, bookmark_id: data.id }
+            : post;
+        }),
+      }));
+    } catch (err) {
+      //console.log(err);
+    }
+  };
+
+  const handleUnBookmark = async () => {
+    try {
+      await axiosRes.delete(`/bookmark/${bookmark_id}/`);
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? { ...post, bookmark_count: post.bookmark_count - 1, bookmark_id: null }
+            : post;
+        }),
+      }));
+    } catch (err) {
+      //console.log(err);
+    }
+  };
+
+    
 
     const ingredientsArray = ingredients?.split(',').map(ingredient => ingredient.trim()) || [];
 
@@ -206,12 +207,37 @@ const Post = (props) => {
         <FontAwesomeIcon icon={faComments} className='Icons' />
         {comments_count}
         </Link>
-        {currentUser && (
-            <span onClick={handleBookmark} className='PostUser'>
-              <FontAwesomeIcon icon={faBookBookmark} className={`Post ${isBookmarked ? 'active-bookmark' : 'inactive-bookmark'} Icons `} />
-              {bookmarks_count}
-            </span>
-          )}
+        {is_owner ? (
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip>You can't bookmark your own post!</Tooltip>}
+          >
+            <div className='PostUser'>
+            <FontAwesomeIcon icon={faBookBookmark} className='Icons' />
+            {bookmark_count}
+            </div>
+          </OverlayTrigger>
+        ) : bookmark_id ? (
+          <span onClick={handleUnBookmark}>
+            <FontAwesomeIcon icon={faBookBookmark} className='Icons active-bookmark' />
+            {bookmark_count}
+          </span>
+        ) : currentUser ? (
+          <span onClick={handleBookmark}>
+              <FontAwesomeIcon icon={faBookBookmark} className='Icons ' />
+              {bookmark_count}
+          </span>
+        ) : (
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip>Log in to bookmark posts!</Tooltip>}
+          >
+            <div className='PostUser'>
+              <FontAwesomeIcon icon={faBookBookmark} className='Icons' />
+              {bookmark_count}
+            </div>
+          </OverlayTrigger>
+        )}
         </div>
       </Card.Body>
   </Card>

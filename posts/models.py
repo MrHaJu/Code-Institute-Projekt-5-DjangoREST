@@ -48,10 +48,3 @@ class Post(models.Model):
     def __str__(self):
         return f'{self.id} {self.title}'
     
-class Bookmark(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey('posts.Post', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    
-    def get_bookmarks(self):
-        return self.bookmark_set.all()

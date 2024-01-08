@@ -2,7 +2,7 @@ from django.db.models import Count
 from rest_framework import generics, permissions, filters, status
 from django_filters.rest_framework import DjangoFilterBackend
 from pp5_api.permissions import IsOwnerOrReadOnly
-from .models import Post, Bookmark
+from .models import Post
 from .serializers import PostSerializer, PostDetailSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
@@ -14,6 +14,7 @@ class PostList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
+        bookmark_count=Count('bookmark', distinct=True),
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
     filter_backends = [
@@ -24,6 +25,7 @@ class PostList(generics.ListCreateAPIView):
     filterset_fields = [
         'owner__followed__owner__profile',
         'likes__owner__profile',
+        'bookmark__owner__profile',
         'owner__profile',
     ]
     search_fields = [
@@ -32,6 +34,7 @@ class PostList(generics.ListCreateAPIView):
     ]
     ordering_fields = [
         'likes_count',
+        'bookmark_count',
         'comments_count',
         'likes__created_at',
     ]
@@ -44,6 +47,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
+        bookmark_count=Count('bookmark', distinct=True),
         comments_count=Count('comment', distinct=True),
     ).order_by('-created_at')
 
@@ -60,38 +64,3 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-@api_view(['POST'])
-def bookmark_post(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    user = request.user
-
-    if not post.bookmark_set.filter(user=user).exists():
-        Bookmark.objects.create(post=post, user=user)
-        return Response(status=status.HTTP_201_CREATED)
-    else:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['DELETE'])
-def unbookmark_post(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    user = request.user
-
-    try:
-        bookmark = Bookmark.objects.get(post=post, user=user)
-        bookmark.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-    except Bookmark.DoesNotExist:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-    
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def post_bookmark_status(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    user = request.user
-
-
-    bookmarked = post.bookmark_set.filter(user=user).exists()
-
-
-    data = {'bookmarked': bookmarked}
-    return Response(data)

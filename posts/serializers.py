@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from posts.models import Post, Bookmark
+from posts.models import Post
 from likes.models import Like
+from bookmark.models import Bookmark
 from comments.models import Comment
 
 
@@ -13,7 +14,8 @@ class PostSerializer(serializers.ModelSerializer):
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
     ingredients = serializers.CharField()
-    bookmarks_count = serializers.SerializerMethodField()
+    bookmark_count = serializers.ReadOnlyField()
+    bookmark_id = serializers.SerializerMethodField()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 *2:
@@ -30,8 +32,14 @@ class PostSerializer(serializers.ModelSerializer):
             )
         return value
     
-    def get_bookmarks_count(self, obj):
-        return obj.bookmark_set.count()
+    def get_bookmark_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            bookmark = Bookmark.objects.filter(
+                owner=user, post=obj
+            ).first()
+            return bookmark.id if bookmark else None
+        return None
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -53,7 +61,7 @@ class PostSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'title', 'content', 'image', 'image_filter',
-            'like_id', 'likes_count', 'comments_count', 'ingredients',  'bookmarks_count',
+            'like_id', 'likes_count', 'comments_count', 'ingredients', 'bookmark_id',  'bookmark_count',
         ]
 
 class PostDetailSerializer(serializers.ModelSerializer):
@@ -65,9 +73,8 @@ class PostDetailSerializer(serializers.ModelSerializer):
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
     ingredients = serializers.CharField(allow_blank=True)
-    bookmarked = serializers.SerializerMethodField()
-    bookmark_checkbox = serializers.BooleanField(write_only=True, required=False)
-    bookmarks_count = serializers.SerializerMethodField()
+    bookmark_id = serializers.SerializerMethodField()
+    bookmark_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 *2:
@@ -98,53 +105,13 @@ class PostDetailSerializer(serializers.ModelSerializer):
         return None
 
 
-    def get_bookmarks_count(self, obj):
-        return obj.bookmark_set.count()
-
-    def get_bookmarked(self, obj):
-        user = self.context['request'].user
-        return obj.bookmark_set.filter(#user=user
-                                       ).exists() # if user=user not commented out, cannot acces postdetails
-
-    def validate(self, data):
-        bookmark_checkbox = data.get('bookmark_checkbox', False)
-        if not self.instance and not bookmark_checkbox:
-            raise serializers.ValidationError('Bookmark checkbox is required.')
-        return data
-
-    def create(self, validated_data):
-        user = self.context['request'].user
-        bookmark_checkbox = validated_data.pop('bookmark_checkbox', False)
-
-        post = super(PostDetailSerializer, self).create(validated_data)
-
-        if bookmark_checkbox:
-            # create bookmark for logged in user
-            Bookmark.objects.create(user=user, post=post)
-
-        return post
-
-    def update(self, instance, validated_data):
-        user = self.context['request'].user
-        bookmark_checkbox = validated_data.pop('bookmark_checkbox', False)
-
-        instance = super(PostDetailSerializer, self).update(instance, validated_data)
-
-        if bookmark_checkbox:
-            # if bookmark_checkbox is True, add 1 bookmark 
-            Bookmark.objects.get_or_create(user=user, post=instance)
-        else:
-            # if bookmark_checkbox is False , delete 1 bookmark
-            Bookmark.objects.filter(user=user, post=instance).delete()
-
-        return instance
-
+    
     class Meta:
         model = Post
         fields = [
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'title', 'content', 'image', 'image_filter',
-            'like_id', 'likes_count', 'comments_count', 'ingredients', 'bookmarked', 'bookmark_checkbox',  'bookmarks_count',
+            'like_id', 'likes_count', 'comments_count', 'ingredients', 'bookmark_id', 'bookmark_count',
         ]
     
