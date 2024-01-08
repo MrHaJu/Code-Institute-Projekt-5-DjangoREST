@@ -43,7 +43,7 @@ class PostList(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = PostDetailSerializer
+    serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
@@ -53,7 +53,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get(self, request, *args, **kwargs):
         post = self.get_object()
-        serializer = PostDetailSerializer(
+        serializer = PostSerializer(
             post, context={'request': request}
         )
         return Response(serializer.data)
