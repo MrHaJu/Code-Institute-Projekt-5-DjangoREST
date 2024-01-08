@@ -18,7 +18,7 @@ export default function Sidebar({links, loggedOutIcons, loggedInIcons, close}){
             <div>
             {currentUser && (
         <Link
-            className="nav-links Text-center row" key="profilesb" id="profilesb"
+            className="nav-links Text-center row pad" key="profilesb" id="profilesb"
             to={`/profiles/${currentUser.profile_id}`}
         >
             <Row>
