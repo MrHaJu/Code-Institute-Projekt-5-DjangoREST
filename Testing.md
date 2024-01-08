@@ -2,27 +2,6 @@
 
 The API testing was initially conducted locally in the development phase. However, the primary testing took place within the frontend repositories. To assess the real APIs, manual testing was performed by interacting with form inputs and navigating through page loads.
 
-
-## Recipes
-
-![Posts]()
-
-## Comments
-
-![Comments]()
-
-## Bookmark
-
-![Contact]()
-
-## Profiles
-
-![Profiles]()
-
-## Auth
-
-![Auth]()
-
 # Lighthouse Testing
 
 Lighthouse testing revealed poor performance. While this was expected with a large number of images, it could be improved in the future by compressing images before uploading them. Unfortunately, I did not have time to implement this functionality in this iteration.
