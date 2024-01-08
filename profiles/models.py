@@ -11,7 +11,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=255, blank=True, null=True)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='../default_profile_qdjgyp'
+        upload_to='images/', default='/images/default_profile_mc0hy3'
     )
     
     class Meta:
